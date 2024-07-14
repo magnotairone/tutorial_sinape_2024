@@ -1,0 +1,702 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Índice}
+\else
+  \newcommand\contentsname{Índice}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Lista de Figuras}
+\else
+  \newcommand\listfigurename{Lista de Figuras}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Lista de Tabelas}
+\else
+  \newcommand\listtablename{Lista de Tabelas}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figura}
+\else
+  \newcommand\figurename{Figura}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Tabela}
+\else
+  \newcommand\tablename{Tabela}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listagem}
+\newcommand*\listoflistings{\listof{codelisting}{Lista de Listagens}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\makeatother
+\makeatletter
+\@ifundefined{shadecolor}{\definecolor{shadecolor}{rgb}{.97, .97, .97}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{portuguese}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Da Teoria à Prática: Modelos de IA Generativa com R e Python},
+  pdfauthor={Magno T. F. Severino},
+  pdflang={pt},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Da Teoria à Prática: Modelos de IA Generativa com R e Python}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Consultando e Extraindo Informações de PDFs com IA}
+\author{Magno T. F. Severino}
+\date{2024-08-08}
+
+\begin{document}
+\maketitle
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, interior hidden, sharp corners, frame hidden, breakable, enhanced, boxrule=0pt]}{\end{tcolorbox}}\fi
+
+\renewcommand*\contentsname{Índice}
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+code-block-bg: true
+
+Organização e Apoio
+
+\includegraphics{img/organizacao.png}
+
+Patrocínio
+
+\includegraphics{img/patrocinio.png}
+
+\hypertarget{introduuxe7uxe3o}{%
+\subsection{Introdução}\label{introduuxe7uxe3o}}
+
+\hypertarget{conceitos-buxe1sicos}{%
+\subsubsection{Conceitos Básicos}\label{conceitos-buxe1sicos}}
+
+\hypertarget{requisitos}{%
+\subsubsection{Requisitos}\label{requisitos}}
+
+R e RStudio Instalado (link para instalação)
+
+Python Instalado (inserir tutorial de instalação através do r)
+
+ChatGTP API: para usar a api do chatgpt, você deve
+\href{https://platform.openai.com/}{se cadastrar}. Além disso você deve
+adicionar créditos para conseguir utilizar a API da OpenAI. Entre
+\href{https://platform.openai.com/settings/organization/billing/overview}{nesta
+página} e adicione. Sugiro adicionar US\$ 1, que será mais do que
+suficiente para execução deste tutorial.
+
+\hypertarget{conexuxe3o-com-a-api-da-openai}{%
+\subsection{Conexão com a API da
+OpenAI}\label{conexuxe3o-com-a-api-da-openai}}
+
+Na \href{https://platform.openai.com/api-keys}{área de API Keys} você
+deve criar nova chave usando o botão \emph{``Create new secret key''}.
+Salve essa chave, que será usada neste tutorial.
+
+Use o código abaixo para salvar a chave como uma variável de ambiente do
+RStudio.
+
+\begin{codelisting}
+
+\caption{\texttt{R}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{Sys.setenv}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{OPENAI\_API\_KEY}\StringTok{\textasciigrave{}}\OtherTok{=} \StringTok{"COLE SUA CHAVE AQUI"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{codelisting}
+
+\hypertarget{configurauxe7uxe3o-de-ambiente-para-rodar-python-no-rstudio}{%
+\subsection{Configuração de ambiente para rodar Python no
+RStudio}\label{configurauxe7uxe3o-de-ambiente-para-rodar-python-no-rstudio}}
+
+\begin{codelisting}
+
+\caption{\texttt{R}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(reticulate)}
+
+\FunctionTok{virtualenv\_create}\NormalTok{(}\AttributeTok{envname =} \StringTok{"langchain\_rag\_pdf"}\NormalTok{,}
+                  \AttributeTok{packages =} \FunctionTok{c}\NormalTok{( }\StringTok{"langchain"}\NormalTok{, }\StringTok{"openai"}\NormalTok{, }\StringTok{"pypdf"}\NormalTok{, }\StringTok{"bs4"}\NormalTok{,}
+                                \StringTok{"python{-}dotenv"}\NormalTok{, }\StringTok{"chromadb"}\NormalTok{, }\StringTok{"tiktoken"}\NormalTok{,}
+                                \StringTok{"langchain{-}openai"}\NormalTok{, }\StringTok{"langchain{-}community"}\NormalTok{))}
+
+\NormalTok{reticulate}\SpecialCharTok{::}\FunctionTok{use\_virtualenv}\NormalTok{(}\StringTok{"langchain\_rag\_pdf"}\NormalTok{)}
+
+\NormalTok{reticulate}\SpecialCharTok{::}\FunctionTok{py\_run\_string}\NormalTok{(}\StringTok{\textquotesingle{}}
+\StringTok{print("Hello, world!") }
+\StringTok{\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{api\_key\_for\_py }\OtherTok{\textless{}{-}} \FunctionTok{r\_to\_py}\NormalTok{(}\FunctionTok{Sys.getenv}\NormalTok{(}\StringTok{"OPENAI\_API\_KEY"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\end{codelisting}
+
+\hypertarget{download-e-importauxe7uxe3o-do-arquivo-em-pdf}{%
+\subsection{Download e importação do arquivo em
+PDF}\label{download-e-importauxe7uxe3o-do-arquivo-em-pdf}}
+
+\begin{codelisting}
+
+\caption{\texttt{R}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\NormalTok{(}\FunctionTok{dir.exists}\NormalTok{(}\StringTok{"docs"}\NormalTok{))) \{}
+  \FunctionTok{dir.create}\NormalTok{(}\StringTok{"docs"}\NormalTok{)}
+\NormalTok{\}}
+
+\FunctionTok{download.file}\NormalTok{(}\StringTok{"https://cran.r{-}project.org/web/packages/ggplot2/ggplot2.pdf"}\NormalTok{,}
+              \AttributeTok{destfile =} \StringTok{"docs/ggplot2.pdf"}\NormalTok{, }\AttributeTok{mode =} \StringTok{"wb"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{codelisting}
+
+\begin{codelisting}
+
+\caption{\texttt{Python}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ langchain.document\_loaders }\ImportTok{import}\NormalTok{ PyPDFLoader}
+
+\NormalTok{my\_loader }\OperatorTok{=}\NormalTok{ PyPDFLoader(}\StringTok{\textquotesingle{}docs/ggplot2.pdf\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\BuiltInTok{type}\NormalTok{(my\_loader))}
+
+\NormalTok{all\_pages }\OperatorTok{=}\NormalTok{ my\_loader.load()}
+
+\BuiltInTok{print}\NormalTok{(}\BuiltInTok{type}\NormalTok{(all\_pages)) }
+
+\BuiltInTok{print}\NormalTok{(}\BuiltInTok{len}\NormalTok{(all\_pages))}
+\end{Highlighting}
+\end{Shaded}
+
+\end{codelisting}
+
+\begin{codelisting}
+
+\caption{\texttt{R}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# carregar documento em R}
+
+\NormalTok{all\_pages\_in\_r }\OtherTok{\textless{}{-}}\NormalTok{ py}\SpecialCharTok{$}\NormalTok{all\_pages}
+
+\NormalTok{all\_pages\_in\_r[[}\DecValTok{1}\NormalTok{]]}\SpecialCharTok{$}\NormalTok{metadata }\CommentTok{\# metadatos do primeiro item}
+\FunctionTok{nchar}\NormalTok{(all\_pages\_in\_r[[}\DecValTok{100}\NormalTok{]]}\SpecialCharTok{$}\NormalTok{page\_content) }\CommentTok{\# conta a quantidade de caracteres do centésimo item}
+\end{Highlighting}
+\end{Shaded}
+
+\end{codelisting}
+
+\hypertarget{divisuxe3o-do-documento-em-pedauxe7os}{%
+\subsection{Divisão do documento em
+pedaços}\label{divisuxe3o-do-documento-em-pedauxe7os}}
+
+\begin{codelisting}
+
+\caption{\texttt{Python}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ openai}
+\NormalTok{openai.api\_key }\OperatorTok{=}\NormalTok{ r.api\_key\_for\_py  }
+\ImportTok{from}\NormalTok{ langchain.text\_splitter }\ImportTok{import}\NormalTok{ RecursiveCharacterTextSplitter}
+\NormalTok{my\_doc\_splitter\_recursive }\OperatorTok{=}\NormalTok{ RecursiveCharacterTextSplitter()}
+\NormalTok{my\_split\_docs }\OperatorTok{=}\NormalTok{ my\_doc\_splitter\_recursive.split\_documents(all\_pages)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{codelisting}
+
+\begin{codelisting}
+
+\caption{\texttt{R}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_split\_docs }\OtherTok{\textless{}{-}}\NormalTok{ py}\SpecialCharTok{$}\NormalTok{my\_split\_docs}
+\end{Highlighting}
+\end{Shaded}
+
+\end{codelisting}
+
+\hypertarget{avaliauxe7uxe3o-do-custo-da-aplicauxe7uxe3o}{%
+\subsection{Avaliação do custo da
+aplicação}\label{avaliauxe7uxe3o-do-custo-da-aplicauxe7uxe3o}}
+
+\begin{codelisting}
+
+\caption{\texttt{R}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_split\_docs }\OtherTok{\textless{}{-}}\NormalTok{ py}\SpecialCharTok{$}\NormalTok{my\_split\_docs}
+\FunctionTok{length}\NormalTok{(my\_split\_docs)}
+
+\NormalTok{total\_tokens }\OtherTok{\textless{}{-}}\NormalTok{ purrr}\SpecialCharTok{::}\FunctionTok{map\_int}\NormalTok{(my\_split\_docs, }
+                               \SpecialCharTok{\textasciitilde{}}\NormalTok{ TheOpenAIR}\SpecialCharTok{::}\FunctionTok{count\_tokens}\NormalTok{(.x}\SpecialCharTok{$}\NormalTok{page\_content)) }\SpecialCharTok{|\textgreater{}} 
+  \FunctionTok{sum}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\end{codelisting}
+
+Atualmente (agosto de 2024), o custo do modelo \textbf{ada v2} usado
+para criação dos \emph{embeddings} da OpenAI é de US\$ 0,10 / 1M tokens.
+Como temos 153.172 tokens, o custo dessa etapa será de aproximadamente
+US\$ 0,0153172.
+
+\hypertarget{gerauxe7uxe3o-de-embeddings}{%
+\subsection{\texorpdfstring{Geração de
+\emph{embeddings}}{Geração de embeddings}}\label{gerauxe7uxe3o-de-embeddings}}
+
+\begin{codelisting}
+
+\caption{\texttt{R}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{dir.exists}\NormalTok{(}\StringTok{"docs/chroma\_db"}\NormalTok{)) \{}
+  \FunctionTok{dir.create}\NormalTok{(}\StringTok{"docs/chroma\_db"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\end{codelisting}
+
+\begin{codelisting}
+
+\caption{\texttt{Python}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ os}
+\NormalTok{os.environ[}\StringTok{"OPENAI\_API\_KEY"}\NormalTok{] }\OperatorTok{=}\NormalTok{ r.api\_key\_for\_py }
+
+\ImportTok{from}\NormalTok{ langchain\_openai }\ImportTok{import}\NormalTok{ OpenAIEmbeddings}
+\NormalTok{embed\_object }\OperatorTok{=}\NormalTok{ OpenAIEmbeddings()}
+
+\ImportTok{from}\NormalTok{ langchain\_community.vectorstores }\ImportTok{import}\NormalTok{ Chroma}
+\NormalTok{chroma\_store\_directory }\OperatorTok{=} \StringTok{"docs/chroma\_db"}
+
+\NormalTok{vectordb }\OperatorTok{=}\NormalTok{ Chroma.from\_documents(}
+\NormalTok{    documents}\OperatorTok{=}\NormalTok{my\_split\_docs,}
+\NormalTok{    embedding}\OperatorTok{=}\NormalTok{embed\_object,}
+\NormalTok{    persist\_directory}\OperatorTok{=}\NormalTok{chroma\_store\_directory}
+\NormalTok{)}
+
+\CommentTok{\# numero de embeddings criados}
+\BuiltInTok{print}\NormalTok{(vectordb.\_collection.count()) }
+\end{Highlighting}
+\end{Shaded}
+
+\end{codelisting}
+
+\hypertarget{gerauxe7uxe3o-de-respostas-uxfanicas}{%
+\subsection{Geração de respostas
+únicas}\label{gerauxe7uxe3o-de-respostas-uxfanicas}}
+
+\hypertarget{carregar-embeddings}{%
+\subsubsection{Carregar embeddings}\label{carregar-embeddings}}
+
+\begin{codelisting}
+
+\caption{\texttt{Python}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# carregar embeddings}
+
+\ImportTok{import}\NormalTok{ openai}
+\NormalTok{openai.api\_key }\OperatorTok{=}\NormalTok{ r.api\_key\_for\_py  }
+\ImportTok{from}\NormalTok{ langchain\_community.embeddings }\ImportTok{import}\NormalTok{ OpenAIEmbeddings}
+\NormalTok{embed\_object }\OperatorTok{=}\NormalTok{ OpenAIEmbeddings()}
+
+\ImportTok{from}\NormalTok{ langchain\_community.vectorstores }\ImportTok{import}\NormalTok{ Chroma}
+\NormalTok{chroma\_store\_directory }\OperatorTok{=} \StringTok{"docs/chroma\_db"}
+\NormalTok{vectordb }\OperatorTok{=}\NormalTok{ Chroma(persist\_directory}\OperatorTok{=}\NormalTok{chroma\_store\_directory, }
+\NormalTok{                  embedding\_function}\OperatorTok{=}\NormalTok{embed\_object)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{codelisting}
+
+\hypertarget{definir-qual-modelo-de-linguagem-seruxe1-usado}{%
+\subsubsection{Definir qual modelo de linguagem será
+usado}\label{definir-qual-modelo-de-linguagem-seruxe1-usado}}
+
+\begin{codelisting}
+
+\caption{\texttt{Python}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Set up the LLM you want to use, in this example OpenAI\textquotesingle{}s gpt{-}3.5{-}turbo}
+\CommentTok{\# from langchain.chat\_models import ChatOpenAI}
+\ImportTok{from}\NormalTok{ langchain\_community.chat\_models }\ImportTok{import}\NormalTok{ ChatOpenAI}
+\ImportTok{from}\NormalTok{ langchain\_openai }\ImportTok{import}\NormalTok{ ChatOpenAI}
+\NormalTok{the\_llm }\OperatorTok{=}\NormalTok{ ChatOpenAI(model\_name}\OperatorTok{=}\StringTok{"gpt{-}3.5{-}turbo"}\NormalTok{, temperature}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+
+\CommentTok{\# Create a chain using the RetrievalQA component}
+\ImportTok{from}\NormalTok{ langchain.chains }\ImportTok{import}\NormalTok{ RetrievalQA}
+\NormalTok{qa\_chain }\OperatorTok{=}\NormalTok{ RetrievalQA.from\_chain\_type(the\_llm, retriever}\OperatorTok{=}\NormalTok{vectordb.as\_retriever())}
+\end{Highlighting}
+\end{Shaded}
+
+\end{codelisting}
+
+\hypertarget{obtenuxe7uxe3o-da-resposta}{%
+\subsubsection{Obtenção da resposta}\label{obtenuxe7uxe3o-da-resposta}}
+
+\begin{codelisting}
+
+\caption{\texttt{Python}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_question }\OperatorTok{=} \StringTok{"How do you rotate text on the x{-}axis of a graph?"}
+\BuiltInTok{print}\NormalTok{(qa\_chain.invoke(my\_question))}
+\end{Highlighting}
+\end{Shaded}
+
+\end{codelisting}
+
+\hypertarget{gerauxe7uxe3o-de-respostas-como-em-uma-conversa}{%
+\subsection{Geração de respostas como em uma
+conversa}\label{gerauxe7uxe3o-de-respostas-como-em-uma-conversa}}
+
+\hypertarget{junuxe7uxe3o-da-consulta-com-os-pedauxe7os-do-documento}{%
+\subsubsection{Junção da consulta com os pedaços do
+documento}\label{junuxe7uxe3o-da-consulta-com-os-pedauxe7os-do-documento}}
+
+\begin{codelisting}
+
+\caption{\texttt{Python}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ langchain\_core.prompts }\ImportTok{import}\NormalTok{ ChatPromptTemplate, MessagesPlaceholder}
+\ImportTok{from}\NormalTok{ langchain.chains }\ImportTok{import}\NormalTok{ create\_retrieval\_chain}
+\ImportTok{from}\NormalTok{ langchain.chains.combine\_documents }\ImportTok{import}\NormalTok{ create\_stuff\_documents\_chain}
+\ImportTok{from}\NormalTok{ langchain\_core.runnables.history }\ImportTok{import}\NormalTok{ RunnableWithMessageHistory}
+\ImportTok{from}\NormalTok{ langchain\_core.chat\_history }\ImportTok{import}\NormalTok{ BaseChatMessageHistory}
+\ImportTok{from}\NormalTok{ langchain\_community.chat\_message\_histories }\ImportTok{import}\NormalTok{ ChatMessageHistory}
+\ImportTok{from}\NormalTok{ langchain\_core.prompts }\ImportTok{import}\NormalTok{ ChatPromptTemplate, MessagesPlaceholder}
+
+\NormalTok{retriever }\OperatorTok{=}\NormalTok{ vectordb.as\_retriever()}
+
+\NormalTok{llm }\OperatorTok{=}\NormalTok{ ChatOpenAI(model}\OperatorTok{=}\StringTok{"gpt{-}3.5{-}turbo"}\NormalTok{, temperature}\OperatorTok{=}\DecValTok{0}\NormalTok{)}
+
+\CommentTok{\#\#\# Contextualize question }\AlertTok{\#\#\#}
+\NormalTok{contextualize\_q\_system\_prompt }\OperatorTok{=}\NormalTok{ (}
+    \StringTok{"Given a chat history and the latest user question "}
+    \StringTok{"which might reference context in the chat history, "}
+    \StringTok{"formulate a standalone question which can be understood "}
+    \StringTok{"without the chat history. Do NOT answer the question, "}
+    \StringTok{"just reformulate it if needed and otherwise return it as is."}
+\NormalTok{)}
+
+\NormalTok{contextualize\_q\_prompt }\OperatorTok{=}\NormalTok{ ChatPromptTemplate.from\_messages(}
+\NormalTok{    [}
+\NormalTok{        (}\StringTok{"system"}\NormalTok{, contextualize\_q\_system\_prompt),}
+\NormalTok{        MessagesPlaceholder(}\StringTok{"chat\_history"}\NormalTok{),}
+\NormalTok{        (}\StringTok{"human"}\NormalTok{, }\StringTok{"}\SpecialCharTok{\{input\}}\StringTok{"}\NormalTok{),}
+\NormalTok{    ]}
+\NormalTok{)}
+
+\NormalTok{history\_aware\_retriever }\OperatorTok{=}\NormalTok{ create\_history\_aware\_retriever(}
+\NormalTok{    llm, retriever, contextualize\_q\_prompt}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{codelisting}
+
+\hypertarget{construuxe7uxe3o-da-resposta}{%
+\subsubsection{Construção da
+resposta}\label{construuxe7uxe3o-da-resposta}}
+
+\begin{codelisting}
+
+\caption{\texttt{Pyhton}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{system\_prompt }\OperatorTok{=}\NormalTok{ (}
+    \StringTok{"You are an assistant for question{-}answering tasks. "}
+    \StringTok{"Use the following pieces of retrieved context to answer "}
+    \StringTok{"the question. If you don\textquotesingle{}t know the answer, say that you "}
+    \StringTok{"don\textquotesingle{}t know. If the question is out of context of the "}
+    \StringTok{"retrieved context, do not answerr and just say it is out of context.}\CharTok{\textbackslash{}n\textbackslash{}n}\StringTok{"}
+    \StringTok{"}\SpecialCharTok{\{context\}}\StringTok{"}
+\NormalTok{)}
+
+\NormalTok{qa\_prompt }\OperatorTok{=}\NormalTok{ ChatPromptTemplate.from\_messages(}
+\NormalTok{    [}
+\NormalTok{        (}\StringTok{"system"}\NormalTok{, system\_prompt),}
+\NormalTok{        MessagesPlaceholder(}\StringTok{"chat\_history"}\NormalTok{),}
+\NormalTok{        (}\StringTok{"human"}\NormalTok{, }\StringTok{"}\SpecialCharTok{\{input\}}\StringTok{"}\NormalTok{),}
+\NormalTok{    ]}
+\NormalTok{)}
+
+\NormalTok{question\_answer\_chain }\OperatorTok{=}\NormalTok{ create\_stuff\_documents\_chain(llm, qa\_prompt)}
+
+\NormalTok{rag\_chain }\OperatorTok{=}\NormalTok{ create\_retrieval\_chain(history\_aware\_retriever, question\_answer\_chain)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{codelisting}
+
+\hypertarget{gerauxe7uxe3o-da-resposta-atravuxe9s-de-uma-conversa}{%
+\subsubsection{Geração da resposta através de uma
+conversa}\label{gerauxe7uxe3o-da-resposta-atravuxe9s-de-uma-conversa}}
+
+\begin{codelisting}
+
+\caption{\texttt{Python}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{store }\OperatorTok{=}\NormalTok{ \{\}}
+
+\KeywordTok{def}\NormalTok{ get\_session\_history(session\_id: }\BuiltInTok{str}\NormalTok{) }\OperatorTok{{-}\textgreater{}}\NormalTok{ BaseChatMessageHistory:}
+    \ControlFlowTok{if}\NormalTok{ session\_id }\KeywordTok{not} \KeywordTok{in}\NormalTok{ store:}
+\NormalTok{        store[session\_id] }\OperatorTok{=}\NormalTok{ ChatMessageHistory()}
+    \ControlFlowTok{return}\NormalTok{ store[session\_id]}
+
+\NormalTok{conversational\_rag\_chain }\OperatorTok{=}\NormalTok{ RunnableWithMessageHistory(}
+\NormalTok{    rag\_chain,}
+\NormalTok{    get\_session\_history,}
+\NormalTok{    input\_messages\_key}\OperatorTok{=}\StringTok{"input"}\NormalTok{,}
+\NormalTok{    history\_messages\_key}\OperatorTok{=}\StringTok{"chat\_history"}\NormalTok{,}
+\NormalTok{    output\_messages\_key}\OperatorTok{=}\StringTok{"answer"}\NormalTok{,}
+\NormalTok{)}
+
+\KeywordTok{def}\NormalTok{ get\_answer(question, session\_id }\OperatorTok{=} \StringTok{"abc123"}\NormalTok{):}
+\NormalTok{  result }\OperatorTok{=}\NormalTok{ conversational\_rag\_chain.invoke(}
+\NormalTok{    \{}\StringTok{"input"}\NormalTok{: question\},}
+\NormalTok{    config}\OperatorTok{=}\NormalTok{\{}\StringTok{"configurable"}\NormalTok{: \{}\StringTok{"session\_id"}\NormalTok{: session\_id\}\},}
+\NormalTok{  )}
+  
+  \ControlFlowTok{return}\NormalTok{ result}
+\end{Highlighting}
+\end{Shaded}
+
+\end{codelisting}
+
+\hypertarget{usando-o-chat-via-python}{%
+\subsubsection{Usando o chat via
+Python}\label{usando-o-chat-via-python}}
+
+\begin{codelisting}
+
+\caption{\texttt{Python}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{while} \VariableTok{True}\NormalTok{:}
+\NormalTok{  my\_question }\OperatorTok{=} \BuiltInTok{input}\NormalTok{(}\StringTok{"Diga: "}\NormalTok{)}
+  
+  \ControlFlowTok{if}\NormalTok{ my\_question.lower() }\OperatorTok{==} \StringTok{\textquotesingle{}sair\textquotesingle{}}\NormalTok{:}
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"Encerrando o chatbot."}\NormalTok{)}
+    \ControlFlowTok{break}
+          
+\NormalTok{  result }\OperatorTok{=}\NormalTok{ get\_answer(my\_question, }\StringTok{"abc123"}\NormalTok{)}
+  
+  \BuiltInTok{print}\NormalTok{(result[}\StringTok{"answer"}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\end{codelisting}
+
+\hypertarget{usando-o-chat-via-r}{%
+\subsubsection{Usando o chat via R}\label{usando-o-chat-via-r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{py\_run\_string}\NormalTok{(}\StringTok{\textquotesingle{}}
+\StringTok{print(qa\_chain.run("How can I make a bar chart where the bars are steel blue? Answer in pt{-}br"))}
+\StringTok{\textquotesingle{}}\NormalTok{)}
+
+\FunctionTok{py\_run\_string}\NormalTok{(}\StringTok{\textquotesingle{}}
+\StringTok{print(qa\_chain.run("What is the capital of Australia?"))}
+\StringTok{\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+
+
+
+\end{document}

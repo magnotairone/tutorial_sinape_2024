@@ -1,0 +1,26 @@
+.quarto-title-block .quarto-title-banner {
+  background-image: url(../img/sinape2024.png);
+  background-size: 120px;
+  background-position: right;
+  background-repeat: no-repeat;
+  padding-left: 10px;
+  background-origin: content-box;
+}
+
+.styled-code-python .code-with-filename-file /*.sourceCode*/ {
+  background-color: rgba(241, 196, 15, 0.4); /* #F1C40F com 50% de transparência */
+  border-radius: 4px;
+}
+
+.styled-code-r .code-with-filename-file /*.sourceCode*/ {
+  background-color: rgba(37, 105, 187, 0.4); /* #2569bb */
+  border-radius: 4px;
+}
+
+pre.sourceCode {
+  padding: 0em;
+}
+
+.code-with-filename .code-with-filename-file pre {
+  background-color: initial;
+}
