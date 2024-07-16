@@ -28,6 +28,7 @@ lang: pt
 
 <style> body {text-align: justify} </style>
 
+::: {.content-visible when-format="html"}
 Organização e Apoio
 
 ![](img/organizacao.png)
@@ -35,25 +36,66 @@ Organização e Apoio
 Patrocínio
 
 ![](img/patrocinio.png)
+::: 
 
+::: {.content-visible when-format="pdf"}
+\pagebreak
+:::
 
 ## Introdução
 
+Este tutorial fornecerá uma base sólida para você explorar e implementar soluções de IA generativa, utilizando as ferramentas e técnicas mais avançadas disponíveis. 
+Ao final deste tutorial, você será capaz de:
+
+- **Compreender** o que são Grandes Modelos de Linguagem (LLM) e suas aplicações práticas.
+- **Entender** o funcionamento do Retrieval-Augmented Generation (RAG).
+- **Aplicar** os conceitos aprendidos para implementar um sistema de RAG usando R e um pouco de Python.
+- **Criar** um chatbot capaz de interagir com o conteúdo de um arquivo PDF.
+
+Todo trecho de código apresentado neste tutorial terá uma marcação no título indicando se é <span style="background-color: rgba(37, 105, 187, 0.4);">R (cor azul)</span> ou <span style="background-color: rgba(241, 196, 15, 0.4);">Python (cor amarela)</span>.
+
 ### Conceitos Básicos
+
+Esses são os conceitos fundamentais para o entendimento do tutorial:
+
+- **Grandes Modelos de Linguagem**: Modelos de inteligência artificial treinados em grandes volumes de texto para entender e gerar linguagem natural de forma semelhante aos humanos. Exemplos incluem GPT-3 e GPT-4.
+
+- **ChatGPT**: Um chatbot avançado baseado no modelo de linguagem GPT da OpenAI, capaz de realizar conversas complexas, responder perguntas e executar tarefas de linguagem natural.
+
+- **Prompt**: Uma instrução ou conjunto de instruções fornecidas a um modelo de linguagem para orientar a geração de respostas ou execução de tarefas específicas.
+
+- **Embedding**: Representação numérica de dados, como palavras ou frases, em um espaço vetorial multidimensional, permitindo que modelos de IA compreendam relações semânticas entre eles.
+
+- **RAG**: Retrieval-Augmented Generation, uma técnica que combina recuperação de informações e geração de texto, onde um modelo de linguagem é usado para gerar respostas com base em documentos recuperados de uma base de dados.
+
+- **API**: Interface de Programação de Aplicações, um conjunto de definições e protocolos que permite a integração entre diferentes softwares, permitindo que eles se comuniquem e compartilhem funcionalidades.
+
 
 ### Requisitos
 
-R e RStudio Instalado (link para instalação)
-
-Python Instalado (inserir tutorial de instalação através do r)
-
-ChatGTP API: para usar a api do chatgpt, você deve [se cadastrar](https://platform.openai.com/).
+- **Conta na OpenAI**: para usar a API do ChatGPT, você deve [se cadastrar](https://platform.openai.com/).
 Além disso você deve adicionar créditos para conseguir utilizar a API da OpenAI. Entre [nesta página](https://platform.openai.com/settings/organization/billing/overview) e adicione.
 Sugiro adicionar US$ 1, que será mais do que suficiente para execução deste tutorial.
 
+- **R e RStudio Instalados**: Para instalação, faça o download do R em <http://www.r-project.org>.
+Em seguida, instale a IDE (Integrated Development Environment) [R Studio](http://www.rstudio.org). 
+
+- **Python Instalado**: Caso não tenha o Python instalado na sua máquina, você pode instalá-lo através do pacote `reticulate` usando o comando `reticulate::install_miniconda()`. Detalhes podem ser encontrados [aqui](https://docs.posit.co/ide/user/ide/guide/environments/py/python.html).
+
+Para configurar o Python dentro do RStudio, siga os passos abaixo:
+
+1. Abra o RStudio.
+2. Vá para o menu `Tools` e selecione `Global Options`.
+3. No painel esquerdo, selecione `Python`.
+4. Clique no botão `Select...`.
+5. Navegue até o executável do Python que você deseja usar e selecione-o. Este caminho é geralmente algo como `C:\Users\SeuUsuario\AppData\Local\Programs\Python\` `PythonXX\python.exe` no Windows, ou `/usr/bin/python3` no Linux/Mac.
+6. Clique em `Apply` e depois em `OK` para salvar as configurações.
+
+
+
 ## Conexão com a API da OpenAI
 
-Na [área de API Keys](https://platform.openai.com/api-keys) você deve criar nova chave usando o botão _"Create new secret key"_. Salve essa chave, que será usada neste tutorial.
+Na [área de API Keys](https://platform.openai.com/api-keys), crie uma nova chave usando o botão _"Create new secret key"_. Salve essa chave, que será usada neste tutorial.
 
 Use o código abaixo para salvar a chave como uma variável de ambiente do RStudio.
 
@@ -63,6 +105,14 @@ Sys.setenv(`OPENAI_API_KEY`= "COLE SUA CHAVE AQUI")
 ```
 
 ## Configuração de ambiente para rodar Python no RStudio
+
+O pacote `reticulate` do R facilita a integração entre R e Python, permitindo que pessoas programadoras de R utilizem funcionalidades avançadas disponíveis em Python diretamente no RStudio. Isso é particularmente útil para trabalhar com grandes modelos linguagens (LLM), que  possuem implementações mais robustas e atualizadas em Python.
+
+Embora `reticulate` torne possível essa integração, é importante ter um conhecimento básico da sintaxe de Python para aproveitar ao máximo as capacidades dos modelos de IA generativa, como o ChatGPT, em suas análises.
+
+No código abaixo, vamos criar um ambiente virtual Python chamado `"langchain_rag_pdf"` e instalar os pacotes necessários para a nossa análise usando o `reticulate`.
+Um ambiente no Python é um espaço isolado onde você pode instalar pacotes e dependências específicas para um projeto, sem interferir em outros projetos. Isso garante que cada projeto possa ter suas próprias versões de pacotes, evitando conflitos e problemas de compatibilidade. No R, normalmente não é necessário criar ambientes separados, pois o gerenciamento de pacotes é feito de forma global. No entanto, a criação de ambientes no Python oferece vantagens significativas, como isolamento, reprodutibilidade e melhor gestão de dependências. 
+
 
 ```{r filename="R"}
 #| classes: styled-code-r
@@ -74,15 +124,31 @@ virtualenv_create(envname = "langchain_rag_pdf",
                                 "langchain-openai", "langchain-community"))
 
 reticulate::use_virtualenv("langchain_rag_pdf")
-
-reticulate::py_run_string('
-print("Estou em Fortaleza!") 
-')
-
-chave_api <- r_to_py(Sys.getenv("OPENAI_API_KEY"))
 ```
 
+Como exemplo de funcionamento da integração entre R e Python usando o pacote reticulate, podemos usar o código abaixo:
+
+```{r filename="R"}
+#| classes: styled-code-r
+reticulate::py_run_string('
+print("Estou no SINAPE em Fortaleza!") 
+')
+```
+
+Para finalizar a configuração, vamos definir uma variável de ambiente com chave da API da OpenAI que foi gerada anteriormente. Altere o código abaixo conforme necessário, substituindo "COLE SUA CHAVE AQUI" pela sua chave de API.
+
+```{r filename="R"}
+#| classes: styled-code-r
+chave_api <- Sys.getenv("OPENAI_API_KEY")
+```
+
+Com isso, a chave da API estará configurada corretamente e você estará pronto para utilizar a OpenAI API no seu ambiente de desenvolvimento.
+
 ## Download e importação do arquivo em PDF
+
+Vamos usar como arquivo de exemplo a documentação do pacote ggplot2, que é amplamente utilizado para criar gráficos no R usando a gramática de gráficos.
+
+Baixe o arquivo PDF que será utilizado no tutorial usando o código abaixo.
 
 ```{r filename="R"}
 #| classes: styled-code-r
@@ -94,9 +160,11 @@ download.file("https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf",
               destfile = "docs/ggplot2.pdf", mode = "wb")
 ```
 
+Importe o arquivo como um objeto no LangChain e carregue seu conteúdo para processamento.
+
 ```{python filename="Python"}
 #| classes: styled-code-python
-from langchain.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import PyPDFLoader
 
 carregar_pdf = PyPDFLoader('docs/ggplot2.pdf')
 print(type(carregar_pdf))
@@ -107,6 +175,9 @@ print(type(paginas))
 
 print(len(paginas))
 ```
+
+Você pode examinar o objeto `paginas` do Python no R usando o objeto `py` do `reticulate.` O código R a seguir armazena o objeto Python paginas em uma variável R chamada `paginas_em_r`. 
+Você pode então trabalhar com o objeto como qualquer outro objeto R. Neste caso, é uma lista.
 
 ```{r filename="R"}
 #| classes: styled-code-r
@@ -121,17 +192,28 @@ nchar(paginas_em_r[[100]]$page_content)
 
 ## Divisão do documento em pedaços
 
+Divida o documento PDF em partes menores para facilitar o processamento pelos modelos de IA.
+
+O código abaixo importa a chave da API da OpenAI da variável `chave_api` do R utilizando o objeto `r` do `reticulate` dentro do Python. 
+Ele também carrega o pacote `openai` do Python e o divisor de caracteres recursivo do LangChain, cria uma instância da classe `RecursiveCharacterTextSplitter` e executa o método `split_documents()` dessa instância nos pedaços do documento `paginas`.
+
+
 ```{python filename="Python"}
 #| classes: styled-code-python
 import openai
-openai.api_key = r.chave_api
-
+openai.api_key = r.chave_api 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 divisor_documento = RecursiveCharacterTextSplitter()
 partes_pdf = divisor_documento.split_documents(paginas)
 ```
 
 ## Avaliação do custo da aplicação
+
+Calcule o custo da aplicação com base no número de tokens gerados.
+the TheOpenAIR R package has a count_tokens() function (make sure to install both that and purrr to use the R code below):
+
+Vamos calcular o custo da aplicação com base no número de tokens gerados. 
+O pacote `TheOpenAIR` do R possui uma função `count_tokens()` (certifique-se de instalar tanto este pacote quanto o `purrr` para usar o código R abaixo):
 
 ```{r filename="R"}
 #| classes: styled-code-r
@@ -143,11 +225,17 @@ total_tokens <- purrr::map_int(partes_pdf,
   sum()
 ```
 
-Atualmente (agosto de 2024), o custo do modelo **ada v2** usado para criação dos _embeddings_ da OpenAI é de US$ 0,10 / 1M tokens.
+O código acima mostra que há 153.172 tokens.
+
+Atualmente (agosto de 2024), o custo do modelo **ada v2** usado para criação dos _embeddings_ da OpenAI é de US$ 0,10 por 1 milhão de tokens.
 Como temos 153.172 tokens, o custo dessa etapa será de aproximadamente US$ 0,0153172.
 
 
 ## Geração de _embeddings_
+
+Vamos criar um diretório para armazenar a base de dados de embeddings e gerar os embeddings dos pedaços do PDF. O LangChain possui componentes pré-fabricados para criar embeddings a partir dos pedaços de texto e armazená-los. Utilizaremos uma das opções mais simples disponíveis no LangChain: Chroma, uma base de dados de embeddings de código aberto que pode ser usada localmente.
+
+Primeiro, criaremos um subdiretório no diretório docs para armazenar a base de dados, conforme sugerido, para evitar que qualquer coisa além da base de dados esteja no diretório Chroma. O código R a seguir cria este subdiretório:
 
 ```{r filename="R"}
 #| classes: styled-code-r
@@ -155,6 +243,8 @@ if(!dir.exists("docs/chroma_db")) {
   dir.create("docs/chroma_db")
 }
 ```
+
+O código acima gera os embeddings utilizando o OpenAIEmbeddings do LangChain, que atualmente utiliza o modelo ada-2 da OpenAI por padrão. O LangChain suporta vários outros LLMs com sua classe Embeddings, incluindo Hugging Face Hub, Cohere, Llama-cpp e Spacy.
 
 ```{python filename="Python"}
 #| classes: styled-code-python
@@ -177,15 +267,25 @@ vetor_db = Chroma.from_documents(
 print(vetor_db._collection.count()) 
 ```
 
+<!-- ## Recuperar informação -->
+
+<!-- TODO: incluir essa parte -->
+<!-- Now it’s time to ask a question, generate embeddings for that question, and retrieve the documents that are most relevant to the question based on the chunks’ embeddings. -->
+
 ## Geração de respostas únicas
 
+Agora vamos trabalhar na construção da integração com o ChatGPT para obter respostas a perguntas. Nessa etapa, a aplicação não terá memória, ou seja, não será possível se referir a respostas anteriores. Usaremos a função `RetrievalQA` do LangChain para perguntar a um LLM, como o GPT-3.5, e gerar uma resposta escrita baseada nos documentos relevantes.
+
 ### Carregar embeddings
+
+Carregue os embeddings gerados aneriormente para realizar consultas ao documento.
+
 ```{python filename="Python"}
 #| classes: styled-code-python
 import openai
 openai.api_key = r.chave_api
 
-from langchain_community.embeddings import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma
 diretorio_chroma_db = "docs/chroma_db"
 vetor_db = Chroma(persist_directory = diretorio_chroma_db, 
@@ -194,16 +294,17 @@ vetor_db = Chroma(persist_directory = diretorio_chroma_db,
 
 ### Definir qual modelo de linguagem será usado
 
-Set up the LLM you want to use, in this example OpenAI's gpt-3.5-turbo
+Configure o modelo de linguagem a ser usado para responder às perguntas.
 
 ```{python filename="Python"}
 #| classes: styled-code-python
 from langchain_community.chat_models import ChatOpenAI
 from langchain_openai import ChatOpenAI
-modelo_llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
+modelo_llm = ChatOpenAI(model_name = "gpt-3.5-turbo", temperature = 0)
 ```
 
-Create a chain using the RetrievalQA component
+Crie a cadeia de obtenção de respostas usando o componente RetrievalQA.
+
 ```{python filename="Python"}
 #| classes: styled-code-python
 from langchain.chains import RetrievalQA
@@ -211,139 +312,199 @@ cadeia = RetrievalQA.from_chain_type(modelo_llm, retriever = vetor_db.as_retriev
 ```
 
 ### Obtenção da resposta
+
+Faça uma pergunta ao modelo e obtenha a resposta baseada no conteúdo do PDF.
+
 ```{python filename="Python"}
 #| classes: styled-code-python
 pergunta = "Como rotacionar o texto no eixo x de um gráfico?"
 print(cadeia.invoke(pergunta))
 ```
 
-Para usar a cadeia de obtenção de respostas no R, faça como no código abaixo.
+Obtemos a seguinte resposta:
 
-```{r}
+```{r eval=FALSE, echo=TRUE}
+Para rotacionar o texto no eixo x de um gráfico, você pode 
+usar a função theme() no ggplot2. Especificamente, o argumento
+axis.text.x é utilizado para modificar a aparência do texto 
+do eixo x. Aqui está um exemplo:
+
+library(ggplot2)
+
+# Create a basic scatter plot
+p <- ggplot(mtcars, aes(x = mpg, y = wt)) +
+  geom_point()
+
+# Rotate x-axis text by 45 degrees
+p + theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+Neste exemplo, o argumento angle é definido como 45, o que 
+rotaciona o texto do eixo x em 45 graus. O argumento hjust é
+definido como 1, alinhando o texto à direita. Você pode ajustar
+os valores de angle e hjust para obter a rotação e o alinhamento
+desejados do texto no eixo x.
+```
+
+Agora que a cadeia está configurada, você pode executá-la em outras perguntas com apenas um comando usando um script R:
+
+```{r filename="R"}
+#| classes: styled-code-r
 py_run_string('
-print(cadeia.run("Como fazer um gráfico de linha usando ggplot?"))
+print(cadeia.run("Como posso fazer um gráfico de barras onde
+as barras são de cor azul usando ggplot?"))
 ')
+```
 
+Resposta:
+
+```{r eval=FALSE, echo=TRUE}
+library(ggplot2)
+
+# Criar um gráfico de barras com barras em azul aço
+p <- ggplot(mtcars, aes(factor(cyl)))
+p + geom_bar(fill = "blue")
+
+Neste exemplo, usamos a estética fill para especificar a cor
+das barras como "blue". Você pode ajustar a cor conforme sua
+preferência, alterando o nome da cor ou utilizando um código
+de cor hexadecimal.
+```
+
+Você também pode querer confirmar que as respostas não estão sendo extraídas da base de conhecimento geral do ChatGPT, mas realmente do documento que você enviou. Para descobrir, você pode fazer uma pergunta completamente não relacionada ao `ggplot2` e que não estaria na documentação:
+
+```{r filename="R"}
 py_run_string('
 print(cadeia.run("Qual a capital do Ceará?"))
 ')
 ```
 
+A resposta deve ser: 
+```{r eval=FALSE, echo=TRUE}
+Eu não sei.
+```
 
 <!-- -------------------------------------------------------------------------------------------------- -->
-## Geração de respostas como em uma conversa
+<!-- ## Geração de respostas como em uma conversa -->
 
 
-### Junção da consulta com os pedaços do documento
+<!-- ### Junção da consulta com os pedaços do documento -->
+
+<!-- Crie a cadeia que permitirá a consulta contínua e interativa com base no histórico de perguntas e respostas. -->
+
+<!-- ```{python filename="Python"} -->
+<!-- #| classes: styled-code-python -->
+<!-- from langchain.chains import create_retrieval_chain -->
+<!-- from langchain.chains.combine_documents import create_stuff_documents_chain -->
+<!-- from langchain_community.chat_message_histories import ChatMessageHistory -->
+<!-- from langchain_core.chat_history import BaseChatMessageHistory -->
+<!-- from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder -->
+<!-- from langchain_core.runnables.history import RunnableWithMessageHistory -->
+
+<!-- modelo_llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0) -->
+
+<!-- retriever = vetor_db.as_retriever() -->
+
+<!-- # contextualização da questão -->
+<!-- promtp_de_contextualizacao = ( -->
+<!--   "Dado um histórico de chat e a última pergunta do usuário " -->
+<!--   "que pode referenciar o contexto no histórico de chat, " -->
+<!--   "formule uma pergunta independente que possa ser compreendida " -->
+<!--   "sem o histórico de chat. NÃO responda à pergunta, " -->
+<!--   "apenas reformule-a se necessário e, caso contrário, retorne-a como está." -->
+<!-- ) -->
+
+<!-- contextualizar_prompt = ChatPromptTemplate.from_messages( -->
+<!--   [ -->
+<!--     ("system", promtp_de_contextualizacao), -->
+<!--     MessagesPlaceholder("chat_history"), -->
+<!--     ("human", "{input}"), -->
+<!--   ] -->
+<!-- ) -->
+
+<!-- recuperador_historico  = create_history_aware_retriever( -->
+<!--     modelo_llm, retriever, contextualizar_prompt -->
+<!-- ) -->
+<!-- ``` -->
+
+<!-- ### Construção da resposta -->
+
+<!-- ```{python filename="Python"} -->
+<!-- #| classes: styled-code-python -->
+<!-- prompt_sistema = ( -->
+<!--   "Você é um assistente para tarefas de perguntas e respostas. " -->
+<!--   "Use os seguintes trechos de contexto recuperado para responder " -->
+<!--   "à pergunta. Se você não souber a resposta, diga que você " -->
+<!--   "não sabe. Se a pergunta estiver fora do contexto recuperado," -->
+<!--   "não responda e apenas diga que está fora do contexto.\n\n" -->
+<!--   "{contexto}" -->
+<!-- ) -->
+
+<!-- prompt_perg_resp = ChatPromptTemplate.from_messages( -->
+<!--   [ -->
+<!--     ("system", prompt_sistema), -->
+<!--     MessagesPlaceholder("chat_history"), -->
+<!--     ("human", "{input}"), -->
+<!--   ] -->
+<!-- ) -->
+
+<!-- cadeia_pergunta_resposta = create_stuff_documents_chain(modelo_llm, prompt_perg_resp) -->
+
+<!-- cadeia_rag = create_retrieval_chain(recuperador_historico, cadeia_pergunta_resposta) -->
+<!-- ``` -->
 
 
-```{python filename="Python"}
-#| classes: styled-code-python
-from langchain.chains import create_retrieval_chain
-from langchain.chains.combine_documents import create_stuff_documents_chain
-from langchain_community.chat_message_histories import ChatMessageHistory
-from langchain_core.chat_history import BaseChatMessageHistory
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_core.runnables.history import RunnableWithMessageHistory
+<!-- ### Geração da resposta através de uma conversa -->
+<!-- ```{python filename="Python"} -->
+<!-- #| classes: styled-code-python -->
+<!-- armazenamento = {} -->
 
-modelo_llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+<!-- def obter_historico_sessao(id_sessao: str) -> BaseChatMessageHistory: -->
+<!--   if id_sessao not in armazenamento: -->
+<!--     armazenamento[id_sessao] = ChatMessageHistory() -->
+<!--   return armazenamento[id_sessao] -->
 
-retriever = vetor_db.as_retriever()
+<!-- cadeia_conversacional_rag  = RunnableWithMessageHistory( -->
+<!--   cadeia_rag, -->
+<!--   obter_historico_sessao, -->
+<!--   input_messages_key = "input", -->
+<!--   history_messages_key = "chat_history", -->
+<!--   output_messages_key = "answer", -->
+<!-- ) -->
 
-# contextualização da questão
-promtp_de_contextualizacao = (
-  "Dado um histórico de chat e a última pergunta do usuário "
-  "que pode referenciar o contexto no histórico de chat, "
-  "formule uma pergunta independente que possa ser compreendida "
-  "sem o histórico de chat. NÃO responda à pergunta, "
-  "apenas reformule-a se necessário e, caso contrário, retorne-a como está."
-)
+<!-- def obter_resposta(question, id_sessao = "abc123"): -->
+<!--   resultado  = cadeia_conversacional_rag .invoke( -->
+<!--     {"input": question}, -->
+<!--     config = {"configurable": {"session_id": id_sessao}}, -->
+<!--   ) -->
+<!--   return resultado  -->
+<!-- ``` -->
 
-contextualizar_prompt = ChatPromptTemplate.from_messages(
-  [
-    ("system", promtp_de_contextualizacao),
-    MessagesPlaceholder("chat_history"),
-    ("human", "{input}"),
-  ]
-)
+<!-- ### Usando o chat via Python -->
+<!-- ```{python filename="Python"} -->
+<!-- #| classes: styled-code-python -->
+<!-- while True: -->
+<!--   pergunta = input("Diga: ") -->
 
-recuperador_historico  = create_history_aware_retriever(
-    modelo_llm, retriever, contextualizar_prompt
-)
-```
+<!--   if pergunta.lower() == 'sair': -->
+<!--     print("Encerrando o chatbot.") -->
+<!--     break -->
 
-### Construção da resposta
+<!--   resultado = obter_resposta(pergunta, "abc123") -->
+<!--   print(resultado["answer"]) -->
+<!-- ``` -->
 
-```{python filename="Python"}
-#| classes: styled-code-python
-prompt_sistema = (
-  "Você é um assistente para tarefas de perguntas e respostas. "
-  "Use os seguintes trechos de contexto recuperado para responder "
-  "à pergunta. Se você não souber a resposta, diga que você "
-  "não sabe. Se a pergunta estiver fora do contexto recuperado,"
-  "não responda e apenas diga que está fora do contexto.\n\n"
-  "{contexto}"
-)
+<!-- ### Usando o chat via R -->
+<!-- ```{r filename="R"} -->
+<!-- #| classes: styled-code-r -->
+<!-- py_run_string(' -->
+<!-- print(obter_resposta("Qual a capital de Minas Gerais?")) -->
+<!-- ') -->
+<!-- ``` -->
 
-prompt_perg_resp = ChatPromptTemplate.from_messages(
-  [
-    ("system", prompt_sistema),
-    MessagesPlaceholder("chat_history"),
-    ("human", "{input}"),
-  ]
-)
+## Referências
 
-cadeia_pergunta_resposta = create_stuff_documents_chain(modelo_llm, prompt_perg_resp)
-
-cadeia_rag = create_retrieval_chain(recuperador_historico, cadeia_pergunta_resposta)
-```
-
-
-### Geração da resposta através de uma conversa
-```{python filename="Python"}
-#| classes: styled-code-python
-armazenamento = {}
-
-def obter_historico_sessao(id_sessao: str) -> BaseChatMessageHistory:
-  if id_sessao not in armazenamento:
-    armazenamento[id_sessao] = ChatMessageHistory()
-  return armazenamento[id_sessao]
-
-cadeia_conversacional_rag  = RunnableWithMessageHistory(
-  cadeia_rag,
-  obter_historico_sessao,
-  input_messages_key = "input",
-  history_messages_key = "chat_history",
-  output_messages_key = "answer",
-)
-
-def obter_resposta(question, id_sessao = "abc123"):
-  resultado  = cadeia_conversacional_rag .invoke(
-    {"input": question},
-    config = {"configurable": {"session_id": id_sessao}},
-  )
-  return resultado 
-```
-
-### Usando o chat via Python
-```{python filename="Python"}
-#| classes: styled-code-python
-while True:
-  pergunta = input("Diga: ")
-  
-  if pergunta.lower() == 'sair':
-    print("Encerrando o chatbot.")
-    break
-   
-  resultado = obter_resposta(pergunta, "abc123")
-  print(resultado["answer"])
-```
-
-### Usando o chat via R
-```{r filename="R"}
-#| classes: styled-code-r
-py_run_string('
-print(obter_resposta("Qual a capital de Minas Gerais?"))
-')
-```
-
+- [Documentação da Plataforma OpenAI ](https://platform.openai.com/docs/introduction)
+- [Documentação LangChain Memory](https://python.langchain.com/v0.1/docs/modules/memory/)
+- [Curso LangChain Chat with Your Data - DeepLearning.AI Short](https://www.deeplearning.ai/short-courses/langchain-chat-with-your-data/)
+- [Call ChatGPT (or really any other API) from R](https://www.r-bloggers.com/2023/03/call-chatgpt-or-really-any-other-api-from-r/)
+- [Building a Portuguese Language RAG Pipeline using Sabia-7B, Qdrant, and LangChain](https://medium.com/@karanshingde/building-a-portuguese-language-rag-pipeline-using-sabia-7b-qdrant-and-langchain-f02eba404eb5)
