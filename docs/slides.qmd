@@ -1,0 +1,48 @@
+---
+title: "Da Teoria à Prática: Modelos de IA Generativa com R e Python"
+subtitle: "Consultando e Extraindo Informações de PDFs com IA"
+author: "Magno T. F. Severino"
+date: "08/08/2024"
+title-slide-attributes:
+  data-background-color: "#2661A5"
+format: 
+  revealjs:
+    theme: simple
+    logo: img/sinape.png
+    css: css/style_slides.css
+footer: ""
+lang: pt
+---
+
+## Ao final deste tutorial, você será capaz de
+
+-   **Compreender** o que são Grandes Modelos de Linguagem (LLM) e suas aplicações práticas.
+
+-   **Entender** o funcionamento do Retrieval-Augmented Generation (RAG).
+
+-   **Aplicar** os conceitos aprendidos para implementar um sistema de RAG usando R e um pouco de Python.
+
+-   **Criar** um chatbot capaz de interagir com o conteúdo de um arquivo PDF.
+
+## Conceitos Importantes
+
+
+## Grandes Modelos de Linguagem (LLM)
+
+## ChatGPT
+
+## Prompt
+
+## Como Inserir Dados em LLM?
+
+## Engenharia de Prompt
+
+## Fine tunning
+
+## RAG
+
+## Embeddings
+
+## Langchain
+
+## API
