@@ -10,39 +10,201 @@ format:
     theme: simple
     logo: img/sinape.png
     css: css/style_slides.css
+    width: 1600
+    height: 900
 footer: ""
 lang: pt
 ---
 
-## Ao final deste tutorial, você será capaz de
+# Ao final deste tutorial, você será capaz
 
--   **Compreender** o que são Grandes Modelos de Linguagem (LLM) e suas aplicações práticas.
+- De  **compreender** o que são Grandes Modelos de Linguagem (LLM) e suas aplicações práticas.
 
--   **Entender** o funcionamento do Retrieval-Augmented Generation (RAG).
+-  De **entender** o funcionamento do Retrieval-Augmented Generation (RAG).
 
--   **Aplicar** os conceitos aprendidos para implementar um sistema de RAG usando R e um pouco de Python.
+-  De **aplicar** os conceitos aprendidos para implementar um sistema de RAG usando R e um pouco de Python.
 
--   **Criar** um chatbot capaz de interagir com o conteúdo de um arquivo PDF.
+-  De **criar** um chatbot capaz de interagir com o conteúdo de um arquivo PDF.
 
 ## Conceitos Importantes
 
 
-## Grandes Modelos de Linguagem (LLM)
+# Grandes Modelos de Linguagem (LLM)
 
-## ChatGPT
+- Modelos de IA treinados em grandes volumes de texto.
 
-## Prompt
+- Capazes de entender e gerar linguagem natural de forma semelhante aos humanos.
 
-## Como Inserir Dados em LLM?
+- Exemplos incluem GPT-3 e GPT-4: 
 
-## Engenharia de Prompt
+# Generative Pre-trained Transformer (GPT)
 
-## Fine tunning
+- Modelo de linguagem baseado em transformadores.
 
-## RAG
+- Pré-treinado em grandes quantidades de dados textuais.
 
-## Embeddings
+- Possuem milhões (ou bilhões) de parâmetros.
 
-## Langchain
+- Especializado em geração de texto de alta qualidade e coerência.
+
+- Exemplos incluem GPT-2, GPT-3 e GPT-4.
+
+# Prompt
+
+- Instrução ou conjunto de instruções fornecidas a um modelo de linguagem.
+
+- Guia a geração de respostas ou execução de tarefas específicas.
+
+- Essencial para obter resultados desejados de um LLM.
+
+- Exemplo:
+
+```
+"Esta semana estou em Fortaleza para um evento científico. Me dê dicas do que fazer para aproveitar a cidade no fim do dia."
+```
 
 ## API
+
+- Interface de Programação de Aplicações (API).
+
+- Conjunto de definições e protocolos para integração entre softwares.
+
+- Permite a comunicação e compartilhamento de funcionalidades entre diferentes sistemas.
+
+```{r eval=FALSE, echo=TRUE}
+chatgpt <- function(prompt)
+  response <- httr::POST(
+    url = "https://api.openai.com/v1/chat/completions", 
+    add_headers(Authorization = paste("Bearer",
+                                      Sys.getenv("OPENAI_API_KEY"))),
+    content_type_json(), encode = "json",
+    body = list(model = "gpt-4o-mini",
+                messages = list(list(role = "user",  content = prompt)))
+  )
+  return(respose)
+
+chatgpt("Quais os principais museus de Fortaleza?")
+```
+
+# Engenharia de Prompt
+
+- "Arte" de criar prompts eficazes para maximizar a qualidade das respostas.
+
+- Inclui técnicas de ajuste de perguntas, fornecimento de contexto e exemplos.
+
+- Fundamental para o sucesso em aplicações práticas de LLM.
+
+- Exemplo: Adicionar contexto específico ao prompt para obter respostas mais precisas.
+
+# Fluxo Conceitual do Uso de um LLM
+
+<br/>
+
+![](img/simple_prompt.webp){width=90%}
+
+# Fine tunning
+
+- Processo de ajuste fino de um LLM em um conjunto de dados específico.
+
+- Melhora o desempenho em tarefas particulares, como análise de sentimentos ou tradução.
+
+- Necessário para adaptar modelos pré-treinados a contextos ou setores específicos.
+
+- Exige um investimento cuidadoso de tempo e esforço.
+
+- Limitação: Pode ser custoso e demorado.
+
+# Geração Aumentada de Recuperação
+
+- Retrieval-Augmented Generation (RAG).
+
+- O modelo de linguagem gera respostas com base em documentos recuperados de uma base de dados.
+
+- Vantagens:
+  - Melhora a precisão das respostas ao fornecer contexto relevante.
+  - Reduz o risco de gerar respostas incorretas ou desinformadas.
+  - Permite atualização fácil de informações ao manter uma base de dados atualizada.
+
+# Fluxo Conceitual do Uso de RAG
+
+![](img/rag_esquema.jpg){fig-align="center"}
+
+::: footer
+Imagem da [Documentação da Amazon AWS](https://aws.amazon.com/pt/what-is/retrieval-augmented-generation/).
+:::
+
+# Embeddings
+
+- Representação numérica de dados em um espaço vetorial multidimensional.
+
+- Utilizados para representar semanticamente palavras, frases ou documentos.
+
+- Facilitam tarefas como busca semântica e análise de similaridade.
+
+# Embeddings
+
+![](img/embedding.webp){fig-align="center"}
+
+::: footer
+Imagem de [Geek Culture](https://medium.com/geekculture/what-are-word-embeddings-6f6f677b13ce).
+:::
+
+# 
+<!-- ![](img/langchain.png){fig-align="center"} -->
+<div style="text-align: center;">
+  <img src="img/langchain.png" alt="Langchain" style="width: 50%;">
+</div>
+
+- Framework de desenvolvimento para aplicações de IA generativa implementado em Python.
+
+- Facilita a integração de LLMs com fontes de dados e ferramentas de processamento.
+
+- Oferece componentes modulares para construção de fluxos de trabalho complexos.
+
+
+# reticulate
+
+:::: {.columns}
+
+::: {.column width="30%"}
+<div style="text-align: center;">
+<img src="img/reticulate.jpg" alt="Langchain" style="width: 80%;">
+</div>
+:::
+
+::: {.column width="70%"}
+- Pacote do R que permite a integração com Python.
+- Facilita a chamada de código Python e uso de suas bibliotecas diretamente do R.
+- Útil para aproveitar ferramentas e modelos de IA disponíveis em Python.
+- Permite a troca de dados e objetos entre R e Python, ampliando as possibilidades analíticas.
+:::
+
+::::
+
+# ggplot2
+
+:::: {.columns}
+
+::: {.column width="40%"}
+<div style="text-align: center;">
+<img src="img/ggplot2.png" alt="Langchain" style="width: 80%;">
+</div>
+:::
+
+::: {.column width="60%"}
+- Pacote de Visualização de Dados em R
+  
+- Baseado na Gramática de Gráficos
+
+- Permite criar visualizações complexas a partir de componentes simples.
+
+- Gráficos como scatter plots, line charts, bar charts, histograms, etc.
+
+- Personalização avançada de gráficos, incluindo temas, escalas e layouts.
+:::
+
+::::
+
+# `r fontawesome::fa("laptop-code", "#2661A5")` Hora de colocar em prática!
+
+

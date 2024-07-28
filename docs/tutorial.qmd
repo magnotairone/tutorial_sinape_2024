@@ -440,7 +440,7 @@ qa.run(pergunta)
 
 E obtemos como resposta:
 
-```         
+``` 
 Para fazer um gráfico de linha no ggplot, você pode usar a função `geom_line()`. 
 Aqui está um exemplo básico:
   
@@ -653,3 +653,4 @@ Este tutorial serve como um ponto de partida para quem deseja aplicar IA generat
 -   [Documentação LangChain Memory](https://python.langchain.com/v0.1/docs/modules/memory/);
 -   [Documentação Plataforma OpenAI](https://platform.openai.com/docs/introduction);
 -   [Documentação Plataforma Pinecone](https://docs.pinecone.io/guides/get-started/quickstart).
+- [O que é a geração aumentada de recuperação?]( https://aws.amazon.com/pt/what-is/retrieval-augmented-generation/)

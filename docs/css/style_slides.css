@@ -4,3 +4,7 @@
   max-width: unset !important;
   max-height: unset !important;
 }
+
+pre, code, .sourceCode {
+  font-size: 25pt;
+}
