@@ -23,12 +23,16 @@ iniciar_chat()
 
 # tarefas:
 # 1. OK apagar versao antiga
-# 2. subir versao nova no github
-# 3. atualizar tutorial
-# 4. fazer slides com conceitos iniciais
+# 2. OK subir versao nova no github
+# 3. OK atualizar tutorial
+# 4. OK fazer slides com conceitos iniciais
   # - LLM
   # - prompt
   # - fine tuning
   # - rag
   # - embedding
   # - ggplot2
+
+# 1. poster - incluir agradecimento e logo fapesp
+# 2. tentar fazer shinydash
+# 3. validar novamente os imports (ver se apago o ambiente e crio novamente)

@@ -4,16 +4,19 @@
 library(reticulate)
 
 virtualenv_create(envname = "langchain_rag",
-                  packages = c("COLOCAR AQUI OS PACOTES NECESSARIOS"))
+                  packages = c(
+                    "langchain",
+                    "langchain-community",
+                    "pypdf",
+                    "pinecone",
+                    "langchain_pinecone",
+                    "langchain-openai",
+                    "pinecone-client[grpc]",
+                    "langchain_openai"
+                  )
+)
 
 reticulate::use_virtualenv("langchain_rag")
-
-# reticulate::py_install(
-#   packages = c(#"pinecone"
-#     # "protoc-gen-openapiv2"
-#     "langchain_pinecone"
-#     ), 
-#   envname = "langchain_rag")
 
 
 reticulate::py_run_string('

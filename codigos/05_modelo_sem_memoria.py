@@ -24,4 +24,4 @@ qa = RetrievalQA.from_chain_type(
 )
 
 pergunta = "Como fazer grafico de linha no ggplot?"
-qa.run(pergunta) 
+qa.invoke(pergunta) 

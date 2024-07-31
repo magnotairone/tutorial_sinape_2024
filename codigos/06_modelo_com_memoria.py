@@ -80,4 +80,3 @@ def obter_resposta(pergunta, id_sessao = "abc123"):
     config = {"configurable": {"session_id": id_sessao}},
   )
   return resultado
-
