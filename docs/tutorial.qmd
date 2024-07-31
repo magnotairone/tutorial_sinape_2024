@@ -158,13 +158,16 @@ No entanto, a criação de ambientes no Python oferece vantagens significativas,
 #| classes: styled-code-r
 library(reticulate)
 
-# TODO: atualizar
 virtualenv_create(
   envname = "langchain_rag_pdf",
   packages = c(
-    "langchain", "openai", "pypdf", "bs4",
-    "python-dotenv", "chromadb", "tiktoken",
-    "langchain-openai", "langchain-community"
+    "langchain",
+    "langchain-community",
+    "pypdf",
+    "pinecone",
+    "langchain_pinecone",
+    "langchain-openai",
+    "pinecone-client[grpc]"
   )
 )
 
