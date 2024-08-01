@@ -388,7 +388,7 @@ Document(metadata={'page': 135.0, 'source': 'codigos_novo/docs/ggplot2.pdf'}, pa
 
 O resultado acima mostra o `resultado[0]` a busca por similaridade vetorial com base na `pergunta`, ou seja, encontra o conteúdo no PDF que mais se assemelha com a pergunta feita.
 
-##Integração com ChatGPT para Geração de Respostas
+## Integração com ChatGPT para Geração de Respostas
 
 Agora, integramos o sistema com o ChatGPT para gerar respostas às consultas baseadas no conteúdo armazenado.
 É importante notar que, nesta etapa, as consultas *ainda* não possuem memória de contexto, ou seja, cada pergunta é tratada de forma independente, sem considerar interações anteriores como em uma conversa contínua de chat.
@@ -433,9 +433,11 @@ qa = RetrievalQA.from_chain_type(
 )
 ```
 
+Por fim, fazemos uma pergunta ao sistema e obtemos a 
+resposta gerada com base nos documentos armazenados:
+
 ```{python filename="Python"}
 #| classes: styled-code-python
-Por fim, fazemos uma pergunta ao sistema e obtemos a resposta gerada com base nos documentos armazenados:
 
 pergunta = "Como fazer gráfico de linha no ggplot?"
 qa.run(pergunta)
@@ -454,13 +456,15 @@ Aqui está um exemplo básico:
   geom_line()
   ` ` `
   
-Se você tiver múltiplas linhas para diferentes grupos, pode usar a estética `group` para diferenciá-las:\n\n
+Se você tiver múltiplas linhas para diferentes grupos, 
+pode usar a estética `group` para diferenciá-las:\n\n
   ` ` `
   ggplot(dados, aes(x = data, y = valor, group = grupo)) +
   geom_line()
   ` ` `
   
-Certifique-se de substituir `dados`, `data`, `valor` e `grupo` pelos nomes reais das suas colunas e dataframe."
+Certifique-se de substituir `dados`, `data`, `valor` e `grupo` pelos
+nomes reais das suas colunas e dataframe."
 ```
 
 Neste exemplo, a resposta será gerada com base no conteúdo relacionado do PDF, mas sem considerar qualquer contexto de perguntas ou respostas anteriores.
