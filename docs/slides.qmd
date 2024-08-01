@@ -250,4 +250,7 @@ ggplot(dados_brasil, aes(ano, expectativa_de_vida)) + geom_line() + geom_point()
 
 # `r fontawesome::fa("laptop-code", "#2661A5")` Hora de colocar em prática!
 
+<div style="text-align: center;">
+<img src="img/qr_code_tutorial.png" alt="gglayers" style="width: 50%;">
+</div>
 
