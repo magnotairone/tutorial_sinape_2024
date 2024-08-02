@@ -28,7 +28,7 @@ editor_options:
 
 -  De **criar** um chatbot capaz de interagir com o conteúdo de um arquivo PDF.
 
-## Conceitos Importantes
+# Conceitos Importantes
 
 
 # Grandes Modelos de Linguagem (LLM)
@@ -37,7 +37,7 @@ editor_options:
 
 - Capazes de entender e gerar linguagem natural de forma semelhante aos humanos.
 
-- Exemplos incluem GPT-3 e GPT-4: 
+- Exemplos incluem GPT-4 e Gemini: 
 
 # Generative Pre-trained Transformer (GPT)
 
@@ -63,29 +63,6 @@ editor_options:
 
 ```
 "Esta semana estou em Fortaleza para um evento científico. Me dê dicas do que fazer para aproveitar a cidade no fim do dia."
-```
-
-## API
-
-- Interface de Programação de Aplicações (API).
-
-- Conjunto de definições e protocolos para integração entre softwares.
-
-- Permite a comunicação e compartilhamento de funcionalidades entre diferentes sistemas.
-
-```{r eval=FALSE, echo=TRUE}
-chatgpt <- function(prompt)
-  response <- httr::POST(
-    url = "https://api.openai.com/v1/chat/completions", 
-    add_headers(Authorization = paste("Bearer",
-                                      Sys.getenv("OPENAI_API_KEY"))),
-    content_type_json(), encode = "json",
-    body = list(model = "gpt-4o-mini",
-                messages = list(list(role = "user",  content = prompt)))
-  )
-  return(respose)
-
-chatgpt("Quais os principais museus de Fortaleza?")
 ```
 
 # Engenharia de Prompt
@@ -162,6 +139,29 @@ Imagem de [Geek Culture](https://medium.com/geekculture/what-are-word-embeddings
 - Facilita a integração de LLMs com fontes de dados e ferramentas de processamento.
 
 - Oferece componentes modulares para construção de fluxos de trabalho complexos.
+
+## API
+
+- Interface de Programação de Aplicações (API).
+
+- Conjunto de definições e protocolos para integração entre softwares.
+
+- Permite a comunicação e compartilhamento de funcionalidades entre diferentes sistemas.
+
+```{r eval=FALSE, echo=TRUE}
+chatgpt <- function(prompt)
+  response <- httr::POST(
+    url = "https://api.openai.com/v1/chat/completions", 
+    add_headers(Authorization = paste("Bearer",
+                                      Sys.getenv("OPENAI_API_KEY"))),
+    content_type_json(), encode = "json",
+    body = list(model = "gpt-4o-mini",
+                messages = list(list(role = "user",  content = prompt)))
+  )
+  return(respose)
+
+chatgpt("Quais os principais museus de Fortaleza?")
+```
 
 
 # reticulate

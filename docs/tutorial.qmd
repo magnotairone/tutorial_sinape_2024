@@ -48,29 +48,29 @@ editor:
 
 ## Objetivo
 
-Desenvolver uma ferramenta de inteligência artificial (IA) generativa capaz de recuperar informações de um ou mais arquivos em formato PDF, utilizando a capacidade dos grandes modelos de linguagem (LLMs) para gerar textos semelhantes à linguagem humana, com base no conteúdo específico dos PDFs fornecidos.
+O objetivo deste tutorial é desenvolver uma ferramenta de inteligência artificial (IA) generativa capaz de recuperar informações de um ou mais arquivos em formato PDF, utilizando a capacidade dos grandes modelos de linguagem (LLMs) para gerar textos semelhantes à linguagem humana, com base no conteúdo específico de um PDF. Ou seja, vamos criar uma aplicação de recuperação de informação em que será possível "conversar" com o conteúdo de um arquivo em PDF.
 
 ## Introdução
 
 Neste tutorial, vamos explorar e implementar soluções de IA generativa, utilizando técnicas avançadas.
 Ao final, você será capaz de:
 
--   **Compreender** o que são Grandes Modelos de Linguagem (LLM) e suas aplicações práticas.
+-   **Compreender** o que são grandes modelos de linguagem (_large language models_, LLM) e suas aplicações práticas.
 -   **Entender** o funcionamento do Retrieval-Augmented Generation (RAG).
 -   **Aplicar** os conceitos aprendidos para implementar um sistema de RAG usando R e um pouco de Python.
 -   **Criar** um chatbot capaz de interagir com o conteúdo de um arquivo PDF.
 
 Atualmente, até onde eu sei, não há implementação de LLMs na linguagem R.
-Entretanto, é possível integrá-los com Python através do pacote `reticulate`, como veremos no tutorial.
+Entretanto, é possível integrá-los com Python através do pacote `reticulate`, como veremos neste tutorial.
 
-Todo trecho de código apresentado aqui terá uma marcação no título indicando se é [R (cor azul)]{style="background-color: rgba(37, 105, 187, 0.4);"} ou [Python (cor amarela)]{style="background-color: rgba(241, 196, 15, 0.4);"}.
+Todo trecho de código apresentado aqui terá uma marcação no título indicando se está escrito em [R (cor azul)]{style="background-color: rgba(37, 105, 187, 0.4);"} ou [Python (cor amarela)]{style="background-color: rgba(241, 196, 15, 0.4);"}.
 
 ### Conceitos Básicos
 
 Esses são os conceitos fundamentais para o entendimento do tutorial:
 
 -   **Grandes Modelos de Linguagem (LLM)**: Modelos de inteligência artificial treinados em grandes volumes de texto para entender e gerar linguagem natural de forma semelhante aos humanos.
-    Exemplos incluem GPT-3 e GPT-4.
+    Exemplos incluem GPT-4, Gemini, entre outros.
 
 -   **ChatGPT**: Um chatbot avançado baseado no modelo de linguagem GPT da OpenAI, capaz de realizar conversas complexas, responder perguntas e executar tarefas de linguagem natural.
 
@@ -146,20 +146,20 @@ Sys.setenv(`PINECONE_API_KEY`= "COLE SUA CHAVE AQUI")
 O pacote `reticulate` do R facilita a integração entre R e Python, permitindo que pessoas programadoras de R utilizem funcionalidades avançadas disponíveis em Python diretamente no RStudio.
 Isso é particularmente útil para trabalhar com grandes modelos linguagens (LLM), que possuem implementações mais robustas e atualizadas em Python.
 
-Embora `reticulate` torne possível essa integração, é importante ter um conhecimento básico da sintaxe de Python para aproveitar ao máximo as capacidades dos modelos de IA generativa, como o ChatGPT, em suas análises.
+Embora o `reticulate` torne possível essa integração, é importante ter um conhecimento básico da sintaxe de Python para aproveitar ao máximo as capacidades dos modelos de IA generativa.
 
-No código abaixo, vamos criar um ambiente virtual Python chamado `"langchain_rag_pdf"` e instalar os pacotes necessários para a nossa análise usando o `reticulate`.
+No código abaixo, vamos criar um ambiente virtual Python chamado `"langchain_rag"` e instalar os pacotes necessários para a nossa análise usando o `reticulate`.
 Um ambiente no Python é um espaço isolado onde você pode instalar pacotes e dependências específicas para um projeto, sem interferir em outros projetos.
 Isso garante que cada projeto possa ter suas próprias versões de pacotes, evitando conflitos e problemas de compatibilidade.
 No R, normalmente não é necessário criar ambientes separados, pois o gerenciamento de pacotes é feito de forma global.
-No entanto, a criação de ambientes no Python oferece vantagens significativas, como isolamento, reprodutibilidade e melhor gestão de dependências.
+No entanto, a criação de ambientes no Python oferece vantagens, como isolamento, reprodutibilidade e melhor gestão de dependências.
 
 ```{r filename="R"}
 #| classes: styled-code-r
 library(reticulate)
 
 virtualenv_create(
-  envname = "langchain_rag_pdf",
+  envname = "langchain_rag",
   packages = c(
     "langchain",
     "langchain-community",
@@ -171,7 +171,7 @@ virtualenv_create(
   )
 )
 
-reticulate::use_virtualenv("langchain_rag_pdf")
+reticulate::use_virtualenv("langchain_rag")
 ```
 
 Como exemplo de funcionamento da integração entre R e Python usando o pacote reticulate, podemos usar o código abaixo:
@@ -210,7 +210,7 @@ download.file("https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf",
               destfile = "docs/ggplot2.pdf", mode = "wb")
 ```
 
-Importe o arquivo como um objeto no LangChain e carregue seu conteúdo para processamento.
+Importe o arquivo como um objeto `PyPDFLoader` do `LangChain` e carregue seu conteúdo para processamento.
 
 ::: {.callout-note title="Atenção"}
 Atenção!
@@ -221,15 +221,15 @@ o código abaixo está em Python.
 #| classes: styled-code-python
 from langchain_community.document_loaders import PyPDFLoader
 
-loader = PyPDFLoader('codigos_novo/docs/ggplot2.pdf')
+loader = PyPDFLoader('codigos/docs/ggplot2.pdf')
 
 paginas = loader.load()
 print(type(paginas)) 
 print(len(paginas))
 ```
 
-Você pode examinar o objeto `paginas` do Python no R usando o objeto `py` do `reticulate.` O código R a seguir armazena o objeto Python paginas em uma variável R chamada `paginas_em_r`.
-Você pode então trabalhar com o objeto como qualquer outro objeto R.
+Você pode examinar a variável `paginas` do Python no R usando o objeto `py` do `reticulate.` O código R a seguir armazena o objeto Python paginas em uma variável R chamada `paginas_em_r`.
+Você pode então trabalhar com ele como qualquer outro objeto R.
 Neste caso, é uma lista.
 
 ```{r filename="R"}
@@ -245,7 +245,7 @@ nchar(paginas_em_r[[100]]$page_content)
 
 ## Divisão do documento em pedaços
 
-O próximo passo é dividir o arquivo PDF em partes menores para facilitar o processamento pelos modelos de IA generativa.\
+O próximo passo é dividir o arquivo PDF em partes menores para facilitar o processamento pelos modelos de IA generativa.
 O trecho de código abaixo utiliza o `CharacterTextSplitter` do `LangChain` para realizar essa tarefa.
 Nele definimos o `tamanho_pedaco` que especifica o tamanho máximo de cada parte em 4000 caracteres, e o `tamanho_intersecao`, que determina uma sobreposição de 150 caracteres entre as partes consecutivas.
 Após a divisão, as partes são armazenadas na variável `partes_pdf`, que contém o texto dividido.
@@ -289,12 +289,13 @@ Ao executar o código acima, veremos que há 153.172 tokens.
 
 Atualmente (agosto de 2024), o custo do modelo **ada v2** usado para criação dos *embeddings* da OpenAI é de US\$ 0,10 por 1 milhão de tokens.
 Como temos 153.172 tokens, o custo dessa etapa será de aproximadamente US\$ 0,0153172.
+Ufa, está dentro do orçamento!
 
 ## Geração de *embeddings*
 
-Agora vamos criar embeddings a partir das partes do PDF utilizando a API da OpenAI e o serviço Pinecone para armazenamento e busca de vetores.
+Agora vamos criar _embeddings_ a partir das partes do PDF utilizando a API da OpenAI e o serviço Pinecone para armazenamento e busca de vetores.
 
-Primeiro, configuramos as chaves de API para acessar os serviços necessários:
+Primeiro, configuramos as chaves de API para acessar os serviços necessários através do Python:
 
 ```{python filename="Python"}
 #| classes: styled-code-python
@@ -307,7 +308,7 @@ os.environ['PINECONE_API_KEY'] = r.chave_api_pinecone
 Veja que no código python acima usamos o objeto `r` para acessar as variáveis R que armazanam as chaves das apis.
 :::
 
-Vamos utilziar o modelo "text-embedding-ada-002" da OpenAI para gerar embeddings a partir do conteúdo do PDF:
+Vamos utilziar o modelo "text-embedding-ada-002" da OpenAI para gerar _embeddings_ a partir do conteúdo do PDF:
 
 ```{python filename="Python"}
 #| classes: styled-code-python
@@ -323,7 +324,7 @@ Cada número no vetor representa uma dimensão no espaço de embeddings, refleti
 Esses vetores são usados para comparar a similaridade entre diferentes textos com base em suas representações vetoriais.
 
 Em seguida, configuramos o Pinecone, o serviço de banco de dados vetorial que vamos usar para armazenar os embeddings gerados.
-Aqui, criamos um índice específico para nossos dados chamado `"tutorial-sinape"`:
+Aqui, criamos um índice específico para nossos dados chamado `"rag_ggplot2"`:
 
 ```{python filename="Python"}
 #| classes: styled-code-python
@@ -332,7 +333,7 @@ from pinecone import ServerlessSpec
 
 pc = Pinecone(os.environ['PINECONE_API_KEY'])
 
-nome_indice = "tutorial-sinape"
+nome_indice = "rag_ggplot2"
 
 if nome_indice not in pc.list_indexes().names():
     pc.create_index(
@@ -354,14 +355,14 @@ A próxima etapa é enviar os *embeddings* para o Pinecone:
 #| classes: styled-code-python
 from langchain_pinecone import PineconeVectorStore
 
-vectorstore_from_docs = PineconeVectorStore.from_documents(
+vetores_dados = PineconeVectorStore.from_documents(
     partes_pdf,
     index_name = nome_indice,
     embedding = embeddings
 )
 ```
 
-Agora, podemos usar diretamente o objeto armezanado na variável `vectorstore_from_docs` ou então, carregar o vetor que está armazenado na Pinecone.
+Agora, podemos usar diretamente o objeto armezanado na variável `vetores_dados` ou então, carregar o vetor que está armazenado na Pinecone.
 
 ```{python filename="Python"}
 #| classes: styled-code-python
@@ -371,22 +372,20 @@ base_conhecimento = PineconeVectorStore.from_existing_index(
 )
 ```
 
-Finalmente, testamos a busca por similaridade com uma pergunta de exemplo, recuperando as partes do documento mais relevantes:
+Finalmente, testamos a busca por similaridade com uma pergunta de exemplo, recuperando as partes do documento mais relevantes para construir uma resposta para a pergunta dada:
 
 ```{python filename="Python"}
 #| classes: styled-code-python
 pergunta = "Como rotacionar o texto no eixo x de um gráfico ggplot?"
 resultado = base_conhecimento.similarity_search(pergunta, k = 3)
 resultado[0]
-resultado[1]
-resultado[2]
 ```
 
 ```         
 Document(metadata={'page': 135.0, 'source': 'codigos_novo/docs/ggplot2.pdf'}, page_content='136 geom_map\nannotate(\n"text", label = "plot mpg vs. wt",\nx = 2, y = 15, size = 8, colour = "red"\n)\n# Aligning labels and bars --------------------------------------------------\ndf <- data.frame(\nx = factor(c(1, 1, 2, 2)),\ny = c(1, 3, 2, 1),\ngrp = c("a", "b", "a", "b")\n)\n# ggplot2 doesn /quotesingle.Vart know you want to give the labels the same virtual width\n# as the bars:\nggplot(data = df, aes(x, y, group = grp)) +\ngeom_col(aes(fill = grp), position = "dodge") +\ngeom_text(aes(label = y), position = "dodge")\n# So tell it:\nggplot(data = df, aes(x, y, group = grp)) +\ngeom_col(aes(fill = grp), position = "dodge") +\ngeom_text(aes(label = y), position = position_dodge(0.9))\n# You can /quotesingle.Vart nudge and dodge text, so instead adjust the y position\nggplot(data = df, aes(x, y, group = grp)) +\ngeom_col(aes(fill = grp), position = "dodge") +\ngeom_text(\naes(label = y, y = y + 0.05),\nposition = position_dodge(0.9),\nvjust = 0\n)\n# To place text in the middle of each bar in a stacked barplot, you\n# need to set the vjust parameter of position_stack()\nggplot(data = df, aes(x, y, group = grp)) +\ngeom_col(aes(fill = grp)) +\ngeom_text(aes(label = y), position = position_stack(vjust = 0.5))\n# Justification -------------------------------------------------------------\ndf <- data.frame(\nx = c(1, 1, 2, 2, 1.5),\ny = c(1, 2, 1, 2, 1.5),\ntext = c("bottom-left", "top-left", "bottom-right", "top-right", "center")\n)\nggplot(df, aes(x, y)) +\ngeom_text(aes(label = text))\nggplot(df, aes(x, y)) +\ngeom_text(aes(label = text), vjust = "inward", hjust = "inward")\ngeom_map Polygons from a reference map')
 ```
 
-O resultado acima mostra o `resultado[0]` a busca por similaridade vetorial com base na `pergunta`, ou seja, encontra o conteúdo no PDF que mais se assemelha com a pergunta feita.
+O resultado acima mostra o `resultado[0]` da busca por similaridade vetorial com base na `pergunta`, ou seja, encontra o conteúdo no PDF que mais se assemelha com a pergunta feita.
 
 ## Integração com ChatGPT para Geração de Respostas
 
@@ -414,7 +413,7 @@ Em seguida, carregamos o repositório de conhecimento armazenado no Pinecone:
 
 ```{python filename="Python"}
 #| classes: styled-code-python
-nome_indice = "tutorial-sinape"
+nome_indice = "rag_ggplot2"
 embeddings = OpenAIEmbeddings(model="text-embedding-ada-002")
 base_conhecimento = PineconeVectorStore.from_existing_index(
     index_name = nome_indice,
@@ -616,11 +615,11 @@ Esse script em R permite iniciar uma sessão de chat interativa, onde os usuári
 
 ## Usando IA generativa brasileira
 
-MaritacaAI é uma plataforma de inteligência artificial desenvolvida no Brasil, focada em fornecer soluções personalizadas de processamento de linguagem natural e aprendizado de máquina.
+A MaritacaAI é uma plataforma de inteligência artificial desenvolvida no Brasil, focada em fornecer soluções personalizadas de processamento de linguagem natural e aprendizado de máquina.
 Ela é projetada para atender às necessidades específicas do mercado brasileiro, oferecendo suporte completo ao português brasileiro e incorporando nuances culturais e linguísticas que são únicas para a região.
 
 Para criar uma conta, [acesse a plataforma aqui](https://plataforma.maritaca.ai/).
-Você ganhará R\$20 de créditos para fazer seus testes.
+Você ganhará (agosto de 2024) R\$20 de créditos para fazer seus testes.
 Atualmente, o modelo mais avançado, o Sabiá-3, custa R\$10 por milhão de tokens.
 Antes de usar, entretanto, você deve cadastrar um cartão de crédito para usos futuros.
 Após feito isso, acesse a [área de API](https://plataforma.maritaca.ai/chaves-de-api) e clique em "Crie Nova Chave".
@@ -641,13 +640,14 @@ llm = ChatMaritalk(
 ```
 
 O resto do código continua exatamente o mesmo.
-Aqui escolhemos trabalhar com o modelo `"sabia-2-small"`, o que apresenta o melhor custo-benefício, custando R\$1 por milhão de tokens de entrada e R\$3 por milhão de token de saída.
+Aqui escolhemos trabalhar com o modelo `"sabia-2-small"`, o que apresenta o melhor custo-benefício, custando R\$1 por milhão de tokens de entrada e R\$3 por milhão de token de saída (referência: agosto de 2024).
 
 ## Conclusão
 
 Neste tutorial, exploramos a criação de uma ferramenta de inteligência artificial generativa capaz de interagir com documentos PDF para recuperar informações específicas e responder a perguntas.
 Ao longo do processo, aprendemos a integrar modelos de linguagem avançados, como os da OpenAI, com o ambiente R utilizando o pacote reticulate.
 Implementamos uma solução que busca e extrai informações relevantes de documentos, e também mantém um histórico de interação para melhorar a contextualização das respostas em conversas subsequentes.
+Também vimos como é fácil alterar o modelo de linguagem usado através do framework `langchain`.
 
 Este tutorial serve como um ponto de partida para quem deseja aplicar IA generativa em cenários reais, especialmente na automação de respostas e análise de documentos textuais.
 

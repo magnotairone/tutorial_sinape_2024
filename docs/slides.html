@@ -405,7 +405,6 @@ Magno T. F. Severino
 
   <p class="date">2024-08-08</p>
 </section>
-<section>
 <section id="ao-final-deste-tutorial-você-será-capaz" class="title-slide slide level1 center">
 <h1>Ao final deste tutorial, você será capaz</h1>
 <ul>
@@ -415,15 +414,18 @@ Magno T. F. Severino
 <li><p>De <strong>criar</strong> um chatbot capaz de interagir com o conteúdo de um arquivo PDF.</p></li>
 </ul>
 </section>
-<section id="conceitos-importantes" class="slide level2">
-<h2>Conceitos Importantes</h2>
-</section></section>
+
+<section id="conceitos-importantes" class="title-slide slide level1 center">
+<h1>Conceitos Importantes</h1>
+
+</section>
+
 <section id="grandes-modelos-de-linguagem-llm" class="title-slide slide level1 center">
 <h1>Grandes Modelos de Linguagem (LLM)</h1>
 <ul>
 <li><p>Modelos de IA treinados em grandes volumes de texto.</p></li>
 <li><p>Capazes de entender e gerar linguagem natural de forma semelhante aos humanos.</p></li>
-<li><p>Exemplos incluem GPT-3 e GPT-4:</p></li>
+<li><p>Exemplos incluem GPT-4 e Gemini:</p></li>
 </ul>
 </section>
 
@@ -438,7 +440,6 @@ Magno T. F. Severino
 </ul>
 </section>
 
-<section>
 <section id="prompt" class="title-slide slide level1 center">
 <h1>Prompt</h1>
 <ul>
@@ -449,28 +450,7 @@ Magno T. F. Severino
 </ul>
 <pre><code>"Esta semana estou em Fortaleza para um evento científico. Me dê dicas do que fazer para aproveitar a cidade no fim do dia."</code></pre>
 </section>
-<section id="api" class="slide level2">
-<h2>API</h2>
-<ul>
-<li><p>Interface de Programação de Aplicações (API).</p></li>
-<li><p>Conjunto de definições e protocolos para integração entre softwares.</p></li>
-<li><p>Permite a comunicação e compartilhamento de funcionalidades entre diferentes sistemas.</p></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>chatgpt <span class="ot">&lt;-</span> <span class="cf">function</span>(prompt)</span>
-<span id="cb2-2"><a href="#cb2-2"></a>  response <span class="ot">&lt;-</span> httr<span class="sc">::</span><span class="fu">POST</span>(</span>
-<span id="cb2-3"><a href="#cb2-3"></a>    <span class="at">url =</span> <span class="st">"https://api.openai.com/v1/chat/completions"</span>, </span>
-<span id="cb2-4"><a href="#cb2-4"></a>    <span class="fu">add_headers</span>(<span class="at">Authorization =</span> <span class="fu">paste</span>(<span class="st">"Bearer"</span>,</span>
-<span id="cb2-5"><a href="#cb2-5"></a>                                      <span class="fu">Sys.getenv</span>(<span class="st">"OPENAI_API_KEY"</span>))),</span>
-<span id="cb2-6"><a href="#cb2-6"></a>    <span class="fu">content_type_json</span>(), <span class="at">encode =</span> <span class="st">"json"</span>,</span>
-<span id="cb2-7"><a href="#cb2-7"></a>    <span class="at">body =</span> <span class="fu">list</span>(<span class="at">model =</span> <span class="st">"gpt-4o-mini"</span>,</span>
-<span id="cb2-8"><a href="#cb2-8"></a>                <span class="at">messages =</span> <span class="fu">list</span>(<span class="fu">list</span>(<span class="at">role =</span> <span class="st">"user"</span>,  <span class="at">content =</span> prompt)))</span>
-<span id="cb2-9"><a href="#cb2-9"></a>  )</span>
-<span id="cb2-10"><a href="#cb2-10"></a>  <span class="fu">return</span>(respose)</span>
-<span id="cb2-11"><a href="#cb2-11"></a></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="fu">chatgpt</span>(<span class="st">"Quais os principais museus de Fortaleza?"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section></section>
+
 <section id="engenharia-de-prompt" class="title-slide slide level1 center">
 <h1>Engenharia de Prompt</h1>
 <ul>
@@ -537,6 +517,7 @@ Magno T. F. Severino
 </div>
 </section>
 
+<section>
 <section id="section" class="title-slide slide level1 center">
 <h1></h1>
 <!-- ![](img/langchain.png){fig-align="center"} -->
@@ -549,7 +530,28 @@ Magno T. F. Severino
 <li><p>Oferece componentes modulares para construção de fluxos de trabalho complexos.</p></li>
 </ul>
 </section>
-
+<section id="api" class="slide level2">
+<h2>API</h2>
+<ul>
+<li><p>Interface de Programação de Aplicações (API).</p></li>
+<li><p>Conjunto de definições e protocolos para integração entre softwares.</p></li>
+<li><p>Permite a comunicação e compartilhamento de funcionalidades entre diferentes sistemas.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>chatgpt <span class="ot">&lt;-</span> <span class="cf">function</span>(prompt)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>  response <span class="ot">&lt;-</span> httr<span class="sc">::</span><span class="fu">POST</span>(</span>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="at">url =</span> <span class="st">"https://api.openai.com/v1/chat/completions"</span>, </span>
+<span id="cb2-4"><a href="#cb2-4"></a>    <span class="fu">add_headers</span>(<span class="at">Authorization =</span> <span class="fu">paste</span>(<span class="st">"Bearer"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5"></a>                                      <span class="fu">Sys.getenv</span>(<span class="st">"OPENAI_API_KEY"</span>))),</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="fu">content_type_json</span>(), <span class="at">encode =</span> <span class="st">"json"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="at">body =</span> <span class="fu">list</span>(<span class="at">model =</span> <span class="st">"gpt-4o-mini"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8"></a>                <span class="at">messages =</span> <span class="fu">list</span>(<span class="fu">list</span>(<span class="at">role =</span> <span class="st">"user"</span>,  <span class="at">content =</span> prompt)))</span>
+<span id="cb2-9"><a href="#cb2-9"></a>  )</span>
+<span id="cb2-10"><a href="#cb2-10"></a>  <span class="fu">return</span>(respose)</span>
+<span id="cb2-11"><a href="#cb2-11"></a></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="fu">chatgpt</span>(<span class="st">"Quais os principais museus de Fortaleza?"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section>
 <section id="reticulate" class="title-slide slide level1 center">
 <h1>reticulate</h1>
 <div class="columns">
