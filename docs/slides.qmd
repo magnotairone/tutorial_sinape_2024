@@ -37,7 +37,7 @@ editor_options:
 
 - Capazes de entender e gerar linguagem natural de forma semelhante aos humanos.
 
-- Exemplos incluem GPT-4 e Gemini: 
+- Exemplos incluem GPT-4 e Gemini.
 
 # Generative Pre-trained Transformer (GPT)
 
