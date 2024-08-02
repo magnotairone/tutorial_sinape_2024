@@ -29,22 +29,22 @@ editor:
     wrap: sentence
 ---
 
-```{=html}
-<style> body {text-align: justify} </style>
-```
-::: {.content-visible when-format="html"}
-Organização e Apoio
+<!-- ```{=html} -->
+<!-- <style> body {text-align: justify} </style> -->
+<!-- ``` -->
+<!-- ::: {.content-visible when-format="html"} -->
+<!-- Organização e Apoio -->
 
-![](img/organizacao.png)
+<!-- ![](img/organizacao.png) -->
 
-Patrocínio
+<!-- Patrocínio -->
 
-![](img/patrocinio.png)
-:::
+<!-- ![](img/patrocinio.png) -->
+<!-- ::: -->
 
-::: {.content-visible when-format="pdf"}
-\pagebreak
-:::
+<!-- ::: {.content-visible when-format="pdf"} -->
+<!-- \pagebreak -->
+<!-- ::: -->
 
 ## Objetivo
 
