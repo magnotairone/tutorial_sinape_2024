@@ -661,9 +661,3 @@ Este tutorial serve como um ponto de partida para quem deseja aplicar IA generat
 -   [Documentação Plataforma OpenAI](https://platform.openai.com/docs/introduction);
 -   [Documentação Plataforma Pinecone](https://docs.pinecone.io/guides/get-started/quickstart).
 - [O que é a geração aumentada de recuperação?]( https://aws.amazon.com/pt/what-is/retrieval-augmented-generation/)
-
-
-::: {.content-visible when-format="html"}
-<a href='http://www.freevisitorcounters.com'>freevisitorcounters</a> <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=b701dd0a26d50f3f1a0a15e630e71f1f53a81287'></script>
-<script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1214513/t/5"></script>
-:::
