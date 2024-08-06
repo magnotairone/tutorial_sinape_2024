@@ -333,7 +333,7 @@ from pinecone import ServerlessSpec
 
 pc = Pinecone(os.environ['PINECONE_API_KEY'])
 
-nome_indice = "rag_ggplot2"
+nome_indice = "rag-ggplot"
 
 if nome_indice not in pc.list_indexes().names():
     pc.create_index(
