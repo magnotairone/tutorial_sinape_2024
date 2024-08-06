@@ -3067,14 +3067,14 @@ background: #2661A5;
   </ul></li>
   <li><a href="#conexão-com-a-api-da-openai" id="toc-conexão-com-a-api-da-openai" class="nav-link" data-scroll-target="#conexão-com-a-api-da-openai">Conexão com a API da OpenAI</a></li>
   <li><a href="#conexão-com-a-api-da-pinecone" id="toc-conexão-com-a-api-da-pinecone" class="nav-link" data-scroll-target="#conexão-com-a-api-da-pinecone">Conexão com a API da Pinecone</a></li>
-  <li><a href="#configuração-de-ambiente-para-rodar-python-no-rstudio" id="toc-configuração-de-ambiente-para-rodar-python-no-rstudio" class="nav-link" data-scroll-target="#configuração-de-ambiente-para-rodar-python-no-rstudio">Configuração de ambiente para rodar Python no RStudio</a></li>
-  <li><a href="#download-e-importação-do-arquivo-em-pdf" id="toc-download-e-importação-do-arquivo-em-pdf" class="nav-link" data-scroll-target="#download-e-importação-do-arquivo-em-pdf">Download e importação do arquivo em PDF</a></li>
-  <li><a href="#divisão-do-documento-em-pedaços" id="toc-divisão-do-documento-em-pedaços" class="nav-link" data-scroll-target="#divisão-do-documento-em-pedaços">Divisão do documento em pedaços</a></li>
-  <li><a href="#avaliação-do-custo-da-aplicação" id="toc-avaliação-do-custo-da-aplicação" class="nav-link" data-scroll-target="#avaliação-do-custo-da-aplicação">Avaliação do custo da aplicação</a></li>
-  <li><a href="#geração-de-embeddings" id="toc-geração-de-embeddings" class="nav-link" data-scroll-target="#geração-de-embeddings">Geração de <em>embeddings</em></a></li>
+  <li><a href="#configuração-de-ambiente-python-no-rstudio" id="toc-configuração-de-ambiente-python-no-rstudio" class="nav-link" data-scroll-target="#configuração-de-ambiente-python-no-rstudio">Configuração de Ambiente Python no RStudio</a></li>
+  <li><a href="#download-e-importação-do-arquivo-em-pdf" id="toc-download-e-importação-do-arquivo-em-pdf" class="nav-link" data-scroll-target="#download-e-importação-do-arquivo-em-pdf">Download e Importação do Arquivo em PDF</a></li>
+  <li><a href="#divisão-do-documento-em-pedaços" id="toc-divisão-do-documento-em-pedaços" class="nav-link" data-scroll-target="#divisão-do-documento-em-pedaços">Divisão do Documento em Pedaços</a></li>
+  <li><a href="#avaliação-do-custo-da-aplicação" id="toc-avaliação-do-custo-da-aplicação" class="nav-link" data-scroll-target="#avaliação-do-custo-da-aplicação">Avaliação do Custo da Aplicação</a></li>
+  <li><a href="#geração-de-embeddings" id="toc-geração-de-embeddings" class="nav-link" data-scroll-target="#geração-de-embeddings">Geração de <em>Embeddings</em></a></li>
   <li><a href="#integração-com-chatgpt-para-geração-de-respostas" id="toc-integração-com-chatgpt-para-geração-de-respostas" class="nav-link" data-scroll-target="#integração-com-chatgpt-para-geração-de-respostas">Integração com ChatGPT para Geração de Respostas</a></li>
   <li><a href="#criação-de-um-chat-com-histórico-de-conversa" id="toc-criação-de-um-chat-com-histórico-de-conversa" class="nav-link" data-scroll-target="#criação-de-um-chat-com-histórico-de-conversa">Criação de um Chat com Histórico de Conversa</a></li>
-  <li><a href="#usando-ia-generativa-brasileira" id="toc-usando-ia-generativa-brasileira" class="nav-link" data-scroll-target="#usando-ia-generativa-brasileira">Usando IA generativa brasileira</a></li>
+  <li><a href="#usando-ia-generativa-brasileira" id="toc-usando-ia-generativa-brasileira" class="nav-link" data-scroll-target="#usando-ia-generativa-brasileira">Usando IA Generativa Brasileira</a></li>
   <li><a href="#conclusão" id="toc-conclusão" class="nav-link" data-scroll-target="#conclusão">Conclusão</a></li>
   <li><a href="#referências" id="toc-referências" class="nav-link" data-scroll-target="#referências">Referências</a></li>
   </ul>
@@ -3172,8 +3172,8 @@ background: #2661A5;
 </div>
 </div>
 </section>
-<section id="configuração-de-ambiente-para-rodar-python-no-rstudio" class="level2">
-<h2 class="anchored" data-anchor-id="configuração-de-ambiente-para-rodar-python-no-rstudio">Configuração de ambiente para rodar Python no RStudio</h2>
+<section id="configuração-de-ambiente-python-no-rstudio" class="level2">
+<h2 class="anchored" data-anchor-id="configuração-de-ambiente-python-no-rstudio">Configuração de Ambiente Python no RStudio</h2>
 <p>O pacote <code>reticulate</code> do R facilita a integração entre R e Python, permitindo que pessoas programadoras de R utilizem funcionalidades avançadas disponíveis em Python diretamente no RStudio. Isso é particularmente útil para trabalhar com grandes modelos linguagens (LLM), que possuem implementações mais robustas e atualizadas em Python.</p>
 <p>Embora o <code>reticulate</code> torne possível essa integração, é importante ter um conhecimento básico da sintaxe de Python para aproveitar ao máximo as capacidades dos modelos de IA generativa.</p>
 <p>No código abaixo, vamos criar um ambiente virtual Python chamado <code>&quot;langchain_rag&quot;</code> e instalar os pacotes necessários para a nossa análise usando o <code>reticulate</code>. Um ambiente no Python é um espaço isolado onde você pode instalar pacotes e dependências específicas para um projeto, sem interferir em outros projetos. Isso garante que cada projeto possa ter suas próprias versões de pacotes, evitando conflitos e problemas de compatibilidade. No R, normalmente não é necessário criar ambientes separados, pois o gerenciamento de pacotes é feito de forma global. No entanto, a criação de ambientes no Python oferece vantagens, como isolamento, reprodutibilidade e melhor gestão de dependências.</p>
@@ -3224,7 +3224,7 @@ background: #2661A5;
 <p>Com isso, as chaves das APIs estarão configuradas corretamente e você estará pronto para utilizar a OpenAI API e a Pinecone API no seu ambiente de desenvolvimento.</p>
 </section>
 <section id="download-e-importação-do-arquivo-em-pdf" class="level2">
-<h2 class="anchored" data-anchor-id="download-e-importação-do-arquivo-em-pdf">Download e importação do arquivo em PDF</h2>
+<h2 class="anchored" data-anchor-id="download-e-importação-do-arquivo-em-pdf">Download e Importação do Arquivo em PDF</h2>
 <p>Vamos usar como arquivo de exemplo a documentação do pacote ggplot2, que é amplamente utilizado para criar gráficos no R usando a gramática de gráficos.</p>
 <p>Baixe o arquivo PDF que será utilizado no tutorial usando o código abaixo.</p>
 <div class="cell styled-code-r">
@@ -3285,7 +3285,7 @@ Atenção
 </div>
 </section>
 <section id="divisão-do-documento-em-pedaços" class="level2">
-<h2 class="anchored" data-anchor-id="divisão-do-documento-em-pedaços">Divisão do documento em pedaços</h2>
+<h2 class="anchored" data-anchor-id="divisão-do-documento-em-pedaços">Divisão do Documento em Pedaços</h2>
 <p>O próximo passo é dividir o arquivo PDF em partes menores para facilitar o processamento pelos modelos de IA generativa. O trecho de código abaixo utiliza o <code>CharacterTextSplitter</code> do <code>LangChain</code> para realizar essa tarefa. Nele definimos o <code>tamanho_pedaco</code> que especifica o tamanho máximo de cada parte em 4000 caracteres, e o <code>tamanho_intersecao</code>, que determina uma sobreposição de 150 caracteres entre as partes consecutivas. Após a divisão, as partes são armazenadas na variável <code>partes_pdf</code>, que contém o texto dividido. O código finaliza imprimindo o número de partes geradas.</p>
 <div class="cell styled-code-python">
 <div class="code-with-filename">
@@ -3310,7 +3310,7 @@ Atenção
 </div>
 </section>
 <section id="avaliação-do-custo-da-aplicação" class="level2">
-<h2 class="anchored" data-anchor-id="avaliação-do-custo-da-aplicação">Avaliação do custo da aplicação</h2>
+<h2 class="anchored" data-anchor-id="avaliação-do-custo-da-aplicação">Avaliação do Custo da Aplicação</h2>
 <p>Vamos calcular o custo da aplicação com base no número de tokens gerados. O pacote <code>TheOpenAIR</code> do R possui uma função <code>count_tokens()</code> (certifique-se de instalar tanto este pacote quanto o <code>purrr</code> para usar o código R abaixo):</p>
 <div class="cell styled-code-r">
 <div class="code-with-filename">
@@ -3329,7 +3329,7 @@ Atenção
 <p>Atualmente (agosto de 2024), o custo do modelo <strong>ada v2</strong> usado para criação dos <em>embeddings</em> da OpenAI é de US$ 0,10 por 1 milhão de tokens. Como temos 153.172 tokens, o custo dessa etapa será de aproximadamente US$ 0,0153172. Ufa, está dentro do orçamento!</p>
 </section>
 <section id="geração-de-embeddings" class="level2">
-<h2 class="anchored" data-anchor-id="geração-de-embeddings">Geração de <em>embeddings</em></h2>
+<h2 class="anchored" data-anchor-id="geração-de-embeddings">Geração de <em>Embeddings</em></h2>
 <p>Agora vamos criar <em>embeddings</em> a partir das partes do PDF utilizando a API da OpenAI e o serviço Pinecone para armazenamento e busca de vetores.</p>
 <p>Primeiro, configuramos as chaves de API para acessar os serviços necessários através do Python:</p>
 <div class="cell styled-code-python">
@@ -3355,7 +3355,7 @@ Dica
 <p>Veja que no código python acima usamos o objeto <code>r</code> para acessar as variáveis R que armazanam as chaves das apis.</p>
 </div>
 </div>
-<p>Vamos utilziar o modelo “text-embedding-ada-002” da OpenAI para gerar <em>embeddings</em> a partir do conteúdo do PDF:</p>
+<p>Vamos utilizar o modelo “text-embedding-ada-002” da OpenAI para gerar <em>embeddings</em> a partir do conteúdo do PDF:</p>
 <div class="cell styled-code-python">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -3669,7 +3669,7 @@ nomes reais das suas colunas e dataframe.&quot;</code></pre>
 <p>Esse script em R permite iniciar uma sessão de chat interativa, onde os usuários podem fazer perguntas e receber respostas contextuais, mantendo um histórico de conversa.</p>
 </section>
 <section id="usando-ia-generativa-brasileira" class="level2">
-<h2 class="anchored" data-anchor-id="usando-ia-generativa-brasileira">Usando IA generativa brasileira</h2>
+<h2 class="anchored" data-anchor-id="usando-ia-generativa-brasileira">Usando IA Generativa Brasileira</h2>
 <p>A MaritacaAI é uma plataforma de inteligência artificial desenvolvida no Brasil, focada em fornecer soluções personalizadas de processamento de linguagem natural e aprendizado de máquina. Ela é projetada para atender às necessidades específicas do mercado brasileiro, oferecendo suporte completo ao português brasileiro e incorporando nuances culturais e linguísticas que são únicas para a região.</p>
 <p>Para criar uma conta, <a href="https://plataforma.maritaca.ai/">acesse a plataforma aqui</a>. Você ganhará (agosto de 2024) R$20 de créditos para fazer seus testes. Atualmente, o modelo mais avançado, o Sabiá-3, custa R$10 por milhão de tokens. Antes de usar, entretanto, você deve cadastrar um cartão de crédito para usos futuros. Após feito isso, acesse a <a href="https://plataforma.maritaca.ai/chaves-de-api">área de API</a> e clique em “Crie Nova Chave”.</p>
 <p>Com a chave em mãos e usando o <code>langchain</code>, fica muito fácil alterar o modelo de LLM usado em nossa aplicação. Basta alterar a parte do código em que criamos a variável <code>llm</code>, como mostramos abaixo:</p>

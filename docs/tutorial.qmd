@@ -141,7 +141,7 @@ Use o código abaixo para salvar a chave como uma variável de ambiente do RStud
 Sys.setenv(`PINECONE_API_KEY`= "COLE SUA CHAVE AQUI")
 ```
 
-## Configuração de ambiente para rodar Python no RStudio
+## Configuração de Ambiente Python no RStudio
 
 O pacote `reticulate` do R facilita a integração entre R e Python, permitindo que pessoas programadoras de R utilizem funcionalidades avançadas disponíveis em Python diretamente no RStudio.
 Isso é particularmente útil para trabalhar com grandes modelos linguagens (LLM), que possuem implementações mais robustas e atualizadas em Python.
@@ -194,7 +194,7 @@ chave_api_pinecone <- Sys.getenv("PINECONE_API_KEY")
 
 Com isso, as chaves das APIs estarão configuradas corretamente e você estará pronto para utilizar a OpenAI API e a Pinecone API no seu ambiente de desenvolvimento.
 
-## Download e importação do arquivo em PDF
+## Download e Importação do Arquivo em PDF
 
 Vamos usar como arquivo de exemplo a documentação do pacote ggplot2, que é amplamente utilizado para criar gráficos no R usando a gramática de gráficos.
 
@@ -243,7 +243,7 @@ paginas_em_r[[1]]$metadata
 nchar(paginas_em_r[[100]]$page_content) 
 ```
 
-## Divisão do documento em pedaços
+## Divisão do Documento em Pedaços
 
 O próximo passo é dividir o arquivo PDF em partes menores para facilitar o processamento pelos modelos de IA generativa.
 O trecho de código abaixo utiliza o `CharacterTextSplitter` do `LangChain` para realizar essa tarefa.
@@ -270,7 +270,7 @@ partes_pdf
 
 ```
 
-## Avaliação do custo da aplicação
+## Avaliação do Custo da Aplicação
 
 Vamos calcular o custo da aplicação com base no número de tokens gerados.
 O pacote `TheOpenAIR` do R possui uma função `count_tokens()` (certifique-se de instalar tanto este pacote quanto o `purrr` para usar o código R abaixo):
@@ -291,7 +291,7 @@ Atualmente (agosto de 2024), o custo do modelo **ada v2** usado para criação d
 Como temos 153.172 tokens, o custo dessa etapa será de aproximadamente US\$ 0,0153172.
 Ufa, está dentro do orçamento!
 
-## Geração de *embeddings*
+## Geração de *Embeddings*
 
 Agora vamos criar _embeddings_ a partir das partes do PDF utilizando a API da OpenAI e o serviço Pinecone para armazenamento e busca de vetores.
 
@@ -308,7 +308,7 @@ os.environ['PINECONE_API_KEY'] = r.chave_api_pinecone
 Veja que no código python acima usamos o objeto `r` para acessar as variáveis R que armazanam as chaves das apis.
 :::
 
-Vamos utilziar o modelo "text-embedding-ada-002" da OpenAI para gerar _embeddings_ a partir do conteúdo do PDF:
+Vamos utilizar o modelo "text-embedding-ada-002" da OpenAI para gerar _embeddings_ a partir do conteúdo do PDF:
 
 ```{python filename="Python"}
 #| classes: styled-code-python
@@ -613,7 +613,7 @@ iniciar_chat()
 
 Esse script em R permite iniciar uma sessão de chat interativa, onde os usuários podem fazer perguntas e receber respostas contextuais, mantendo um histórico de conversa.
 
-## Usando IA generativa brasileira
+## Usando IA Generativa Brasileira
 
 A MaritacaAI é uma plataforma de inteligência artificial desenvolvida no Brasil, focada em fornecer soluções personalizadas de processamento de linguagem natural e aprendizado de máquina.
 Ela é projetada para atender às necessidades específicas do mercado brasileiro, oferecendo suporte completo ao português brasileiro e incorporando nuances culturais e linguísticas que são únicas para a região.
