@@ -8,15 +8,16 @@ from pinecone import ServerlessSpec
 os.environ["OPENAI_API_KEY"] = r.chave_api_openai
 os.environ['PINECONE_API_KEY'] = r.chave_api_pinecone
 
-embeddings = OpenAIEmbeddings(model="text-embedding-ada-002")
+embeddings = OpenAIEmbeddings(model = "text-embedding-ada-002")
 
+# criando um vetor de embedding com o conteudo da centesima parte
 resultado = embeddings.embed_query(partes_pdf[100].page_content)
 print(resultado)
 
 # ---- criar indice (index) no pinecone
 pc = Pinecone(os.environ['PINECONE_API_KEY'])
 
-nome_indice = "tutorial-sinape"
+nome_indice = "rag-ggplot"
 
 if nome_indice not in pc.list_indexes().names():
     pc.create_index(

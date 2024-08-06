@@ -1,9 +1,7 @@
 # Sys.setenv(`OPENAI_API_KEY`= "COLE SUA CHAVE AQUI")
 # Sys.setenv(`PINECONE_API_KEY`= "COLE SUA CHAVE AQUI")
 
-library(reticulate)
-
-virtualenv_create(envname = "langchain_rag",
+reticulate::virtualenv_create(envname = "langchain_rag",
                   packages = c(
                     "langchain",
                     "langchain-community",

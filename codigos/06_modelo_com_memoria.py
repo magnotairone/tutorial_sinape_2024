@@ -7,7 +7,10 @@ from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain.chains import create_history_aware_retriever
 
-llm = ChatOpenAI(model = "gpt-4o-mini", temperature = 0)
+llm = ChatOpenAI(
+  model = "gpt-4o-mini", 
+  temperature = 0
+)
 
 recuperador = base_conhecimento.as_retriever()
 
@@ -32,7 +35,7 @@ recuperador_historico = create_history_aware_retriever(
 )
 
 prompt_final = (
-  "Você é um assistente para tarefas de perguntas e respostas. "
+  "Você é um assistente para tarefas de perguntas e respostas sobre o ggplot2. "
   "Use os seguintes trechos de contexto recuperado para responder "
   "à pergunta. Se você não souber a resposta, diga que você "
   "não sabe. Se a pergunta estiver fora do contexto recuperado, "

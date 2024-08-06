@@ -7,10 +7,10 @@ from langchain_pinecone import PineconeVectorStore
 llm = ChatOpenAI(  
     openai_api_key = os.environ["OPENAI_API_KEY"],  
     model_name = "gpt-4o-mini",  
-    temperature = 0.0  
+    temperature = 0 
 )  
 
-nome_indice = "tutorial-sinape"
+nome_indice = "rag-ggplot"
 embeddings = OpenAIEmbeddings(model="text-embedding-ada-002")
 base_conhecimento = PineconeVectorStore.from_existing_index(
     index_name = nome_indice,
@@ -22,6 +22,9 @@ qa = RetrievalQA.from_chain_type(
     chain_type = "stuff",  
     retriever = base_conhecimento.as_retriever()  
 )
+
+pergunta = "Em um gráfico ggplot, como rotacionar o texto no eixo x?"
+qa.invoke(pergunta) 
 
 pergunta = "Como fazer grafico de linha no ggplot?"
 qa.invoke(pergunta) 
