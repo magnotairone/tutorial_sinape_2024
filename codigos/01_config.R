@@ -23,8 +23,7 @@ print("Estou em Fortaleza!")
 
 chave_api_openai <- Sys.getenv("OPENAI_API_KEY")
 chave_api_pinecone <- Sys.getenv("PINECONE_API_KEY")
-
-chave_api_maritaca <- Sys.getenv("MARITACAAI_API_KEY")
+chave_api_maritaca <- Sys.getenv("MARITACAAI_API_KEY") # opcional
 
 if(!(dir.exists("codigos/docs"))) {
   dir.create("codigos/docs")

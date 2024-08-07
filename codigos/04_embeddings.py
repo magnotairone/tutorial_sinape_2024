@@ -12,6 +12,7 @@ embeddings = OpenAIEmbeddings(model = "text-embedding-ada-002")
 
 # criando um vetor de embedding com o conteudo da centesima parte
 resultado = embeddings.embed_query(partes_pdf[100].page_content)
+print(partes_pdf[100].page_content)
 print(resultado)
 
 # ---- criar indice (index) no pinecone
