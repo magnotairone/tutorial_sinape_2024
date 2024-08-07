@@ -1,6 +1,9 @@
 resposta = reticulate::py$obter_resposta("Qual a capital do Ceará?")
 resposta$answer
 
+resposta = reticulate::py$obter_resposta("Como fazer um boxplot?")
+resposta$answer
+
 iniciar_chat <- function(id_sessao = "abc123") {
   print("Iniciando chatGGPLOT, digite 'sair' para terminar.")
   
