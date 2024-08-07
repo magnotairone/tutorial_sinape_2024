@@ -11,7 +11,7 @@ maritaca = ChatMaritalk(
     max_tokens = 2000,
 )
 
-nome_indice = "tutorial-sinape"
+nome_indice = "rag-ggplot"
 embeddings = OpenAIEmbeddings(model="text-embedding-ada-002")
 base_conhecimento = PineconeVectorStore.from_existing_index(
     index_name = nome_indice,

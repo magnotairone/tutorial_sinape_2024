@@ -48,6 +48,6 @@ base_conhecimento = PineconeVectorStore.from_existing_index(
 
 pergunta = "Como rotacionar o texto no eixo x de um gráfico ggplot?"
 resultado = base_conhecimento.similarity_search(pergunta, k = 3)
-resultado[0]
-resultado[1]
-resultado[2]
+print(resultado[0])
+print(resultado[1])
+print(resultado[2])
