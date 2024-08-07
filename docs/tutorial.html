@@ -3045,7 +3045,7 @@ background: #2661A5;
       <div>
       <div class="quarto-title-meta-heading">Data de Publicação</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">8 de agosto de 2024</p>
+        <p class="date">7 de agosto de 2024</p>
       </div>
     </div>
     
@@ -3075,6 +3075,7 @@ background: #2661A5;
   <li><a href="#integração-com-chatgpt-para-geração-de-respostas" id="toc-integração-com-chatgpt-para-geração-de-respostas" class="nav-link" data-scroll-target="#integração-com-chatgpt-para-geração-de-respostas">Integração com ChatGPT para Geração de Respostas</a></li>
   <li><a href="#criação-de-um-chat-com-histórico-de-conversa" id="toc-criação-de-um-chat-com-histórico-de-conversa" class="nav-link" data-scroll-target="#criação-de-um-chat-com-histórico-de-conversa">Criação de um Chat com Histórico de Conversa</a></li>
   <li><a href="#usando-ia-generativa-brasileira" id="toc-usando-ia-generativa-brasileira" class="nav-link" data-scroll-target="#usando-ia-generativa-brasileira">Usando IA Generativa Brasileira</a></li>
+  <li><a href="#código-fonte" id="toc-código-fonte" class="nav-link" data-scroll-target="#código-fonte">Código Fonte</a></li>
   <li><a href="#conclusão" id="toc-conclusão" class="nav-link" data-scroll-target="#conclusão">Conclusão</a></li>
   <li><a href="#referências" id="toc-referências" class="nav-link" data-scroll-target="#referências">Referências</a></li>
   </ul>
@@ -3690,6 +3691,10 @@ nomes reais das suas colunas e dataframe.&quot;</code></pre>
 </div>
 <p>O resto do código continua exatamente o mesmo. Aqui escolhemos trabalhar com o modelo <code>&quot;sabia-2-small&quot;</code>, o que apresenta o melhor custo-benefício, custando R$1 por milhão de tokens de entrada e R$3 por milhão de token de saída (referência: agosto de 2024).</p>
 </section>
+<section id="código-fonte" class="level2">
+<h2 class="anchored" data-anchor-id="código-fonte">Código Fonte</h2>
+<p>O código fonte completo usado neste tutorial está disponível no diretório <code>codigos/</code> <a href="https://github.com/magnotairone/tutorial_sinape_2024/tree/main/codigos">neste repositório</a> no GitHub. Os slides usados durante a apresentação podem ser encontrados <a href="https://magnotairone.github.io/tutorial_sinape_2024/slides#/title-slide">neste link</a>.</p>
+</section>
 <section id="conclusão" class="level2">
 <h2 class="anchored" data-anchor-id="conclusão">Conclusão</h2>
 <p>Neste tutorial, exploramos a criação de uma ferramenta de inteligência artificial generativa capaz de interagir com documentos PDF para recuperar informações específicas e responder a perguntas. Ao longo do processo, aprendemos a integrar modelos de linguagem avançados, como os da OpenAI, com o ambiente R utilizando o pacote reticulate. Implementamos uma solução que busca e extrai informações relevantes de documentos, e também mantém um histórico de interação para melhorar a contextualização das respostas em conversas subsequentes. Também vimos como é fácil alterar o modelo de linguagem usado através do framework <code>langchain</code>.</p>
@@ -3701,11 +3706,11 @@ nomes reais das suas colunas e dataframe.&quot;</code></pre>
 <li><a href="https://medium.com/@karanshingde/building-a-portuguese-language-rag-pipeline-using-sabia-7b-qdrant-and-langchain-f02eba404eb5">Building a Portuguese Language RAG Pipeline using Sabia-7B, Qdrant, and LangChain</a>;</li>
 <li><a href="https://www.r-bloggers.com/2023/03/call-chatgpt-or-really-any-other-api-from-r/">Call ChatGPT (or really any other API) from R</a>;</li>
 <li>Curso <a href="https://www.deeplearning.ai/short-courses/langchain-chat-with-your-data/">LangChain Chat with Your Data - DeepLearning.AI Short</a>;</li>
-<li><a href="https://python.langchain.com/v0.2/docs/integrations/chat/maritalk/#example-2---rag-llm-unicamp-2024-entrance-exam-question-answering-system">Documentação LangChain Maritalk</a>;</li>
-<li><a href="https://python.langchain.com/v0.1/docs/modules/memory/">Documentação LangChain Memory</a>;</li>
-<li><a href="https://platform.openai.com/docs/introduction">Documentação Plataforma OpenAI</a>;</li>
-<li><a href="https://docs.pinecone.io/guides/get-started/quickstart">Documentação Plataforma Pinecone</a>.</li>
-<li><a href="https://aws.amazon.com/pt/what-is/retrieval-augmented-generation/">O que é a geração aumentada de recuperação?</a></li>
+<li>Documentação <a href="https://python.langchain.com/v0.2/docs/integrations/chat/maritalk/#example-2---rag-llm-unicamp-2024-entrance-exam-question-answering-system">LangChain Maritalk</a>;</li>
+<li>Documentação <a href="https://python.langchain.com/v0.1/docs/modules/memory/">LangChain Memory</a>;</li>
+<li>Documentação <a href="https://platform.openai.com/docs/introduction">Plataforma OpenAI</a>;</li>
+<li>Documentação <a href="https://docs.pinecone.io/guides/get-started/quickstart">Plataforma Pinecone</a>;</li>
+<li><a href="https://aws.amazon.com/pt/what-is/retrieval-augmented-generation/">O que é a geração aumentada de recuperação?</a>.</li>
 </ul>
 </section>
 

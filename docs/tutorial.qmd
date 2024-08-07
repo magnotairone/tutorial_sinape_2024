@@ -2,7 +2,7 @@
 title: "Da Teoria à Prática: Modelos de IA Generativa com R e Python"
 subtitle: "Consultando e Extraindo Informações de PDFs com IA"
 author: "Magno T. F. Severino"
-date: "08/08/2024"
+date: "08/07/2024"
 title-block-banner: "#2661A5"
 format: 
   html:
@@ -642,6 +642,11 @@ llm = ChatMaritalk(
 O resto do código continua exatamente o mesmo.
 Aqui escolhemos trabalhar com o modelo `"sabia-2-small"`, o que apresenta o melhor custo-benefício, custando R\$1 por milhão de tokens de entrada e R\$3 por milhão de token de saída (referência: agosto de 2024).
 
+## Código Fonte
+
+O código fonte completo usado neste tutorial está disponível no diretório `codigos/` [neste repositório](https://github.com/magnotairone/tutorial_sinape_2024/tree/main/codigos) no GitHub. 
+Os slides usados durante a apresentação podem ser encontrados [neste link](https://magnotairone.github.io/tutorial_sinape_2024/slides#/title-slide).
+
 ## Conclusão
 
 Neste tutorial, exploramos a criação de uma ferramenta de inteligência artificial generativa capaz de interagir com documentos PDF para recuperar informações específicas e responder a perguntas.
@@ -656,8 +661,8 @@ Este tutorial serve como um ponto de partida para quem deseja aplicar IA generat
 -   [Building a Portuguese Language RAG Pipeline using Sabia-7B, Qdrant, and LangChain](https://medium.com/@karanshingde/building-a-portuguese-language-rag-pipeline-using-sabia-7b-qdrant-and-langchain-f02eba404eb5);
 -   [Call ChatGPT (or really any other API) from R](https://www.r-bloggers.com/2023/03/call-chatgpt-or-really-any-other-api-from-r/);
 -   Curso [LangChain Chat with Your Data - DeepLearning.AI Short](https://www.deeplearning.ai/short-courses/langchain-chat-with-your-data/);
-- [Documentação LangChain Maritalk](https://python.langchain.com/v0.2/docs/integrations/chat/maritalk/#example-2---rag-llm-unicamp-2024-entrance-exam-question-answering-system);
--   [Documentação LangChain Memory](https://python.langchain.com/v0.1/docs/modules/memory/);
--   [Documentação Plataforma OpenAI](https://platform.openai.com/docs/introduction);
--   [Documentação Plataforma Pinecone](https://docs.pinecone.io/guides/get-started/quickstart).
-- [O que é a geração aumentada de recuperação?]( https://aws.amazon.com/pt/what-is/retrieval-augmented-generation/)
+- Documentação [LangChain Maritalk](https://python.langchain.com/v0.2/docs/integrations/chat/maritalk/#example-2---rag-llm-unicamp-2024-entrance-exam-question-answering-system);
+-   Documentação [LangChain Memory](https://python.langchain.com/v0.1/docs/modules/memory/);
+-   Documentação [Plataforma OpenAI](https://platform.openai.com/docs/introduction);
+-   Documentação [Plataforma Pinecone](https://docs.pinecone.io/guides/get-started/quickstart);
+- [O que é a geração aumentada de recuperação?]( https://aws.amazon.com/pt/what-is/retrieval-augmented-generation/).

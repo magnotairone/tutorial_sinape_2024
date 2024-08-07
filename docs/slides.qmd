@@ -2,7 +2,7 @@
 title: "Da Teoria à Prática: Modelos de IA Generativa com R e Python"
 subtitle: "Consultando e Extraindo Informações de PDFs com IA"
 author: "Magno T. F. Severino"
-date: "08/08/2024"
+date: "08/07/2024"
 title-slide-attributes:
   data-background-color: "#2661A5"
 format: 
