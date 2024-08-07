@@ -202,8 +202,8 @@ Baixe o arquivo PDF que será utilizado no tutorial usando o código abaixo.
 
 ```{r filename="R"}
 #| classes: styled-code-r
-if(!(dir.exists("docs"))) {
-  dir.create("docs")
+if(!(dir.exists("codigos/docs"))) {
+  dir.create("codigos/docs")
 }
 
 download.file("https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf",
