@@ -20,11 +20,11 @@ editor_options:
 
 # Ao final deste tutorial, você será capaz
 
-- De  **compreender** o que são Grandes Modelos de Linguagem (LLM) e suas aplicações práticas.
+- De  **compreender** o que são Grandes Modelos de Linguagem (LLM) e suas aplicações práticas;
 
--  De **entender** o funcionamento do Retrieval-Augmented Generation (RAG).
+-  De **entender** o funcionamento do Retrieval-Augmented Generation (RAG);
 
--  De **aplicar** os conceitos aprendidos para implementar um sistema de RAG usando R e um pouco de Python.
+-  De **aplicar** os conceitos aprendidos para implementar um sistema de RAG usando R e um pouco de Python;
 
 -  De **criar** um chatbot capaz de interagir com o conteúdo de um arquivo PDF.
 
@@ -181,7 +181,7 @@ chatgpt("Quais os principais museus de Fortaleza?")
 - Pacote do R que permite a integração com Python.
 - Facilita a chamada de código Python e uso de suas bibliotecas diretamente do R.
 - Útil para aproveitar ferramentas e modelos de IA disponíveis em Python.
-- Permite a troca de dados e objetos entre R e Python, ampliando as possibilidades analíticas.
+- Permite a troca de dados e objetos entre R e Python.
 :::
 
 ::::
@@ -197,13 +197,13 @@ chatgpt("Quais os principais museus de Fortaleza?")
 :::
 
 ::: {.column width="60%"}
-- Pacote de Visualização de Dados em R
+- Pacote de Visualização de Dados em R.
   
-- Baseado na Gramática de Gráficos
+- Baseado na Gramática de Gráficos.
 
 - Permite criar visualizações complexas a partir de componentes simples.
 
-- Gráficos como scatter plots, line charts, bar charts, histograms, etc.
+- Gráficos como de dispersão, de linhas, de barras, histogramas, etc.
 
 - Personalização avançada de gráficos, incluindo temas, escalas e layouts.
 :::
@@ -250,15 +250,15 @@ ggplot(dados_brasil, aes(ano, expectativa_de_vida)) + geom_line() + geom_point()
   theme(axis.text = element_text(size = 18), axis.title = element_text(size = 20))
 ```
 
-# Requisitos necessários para reprodução
+# Requisitos Necessários para Reprodução
 
--   *R e RStudio Instalados.
+- R e RStudio Instalados.
 
--   *Python Instalado.
+- Python Instalado.
 
--   *Conta na plataforma OpenAI.
+- Conta na plataforma OpenAI.
 
--   *Conta na plataforma Pinecone.
+- Conta na plataforma Pinecone.
 
 
 # `r fontawesome::fa("laptop-code", "#2661A5")` Hora de colocar em prática!
